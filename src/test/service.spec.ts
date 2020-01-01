@@ -1,10 +1,36 @@
 // tslint:disable-next-line:no-implicit-dependencies
 import { Test, TestingModule } from '@nestjs/testing';
 import { AclModule } from '../module';
-import { AclService } from '../service';
-import { initAcl } from './acl';
 import { ForbiddenException, UnauthorizedException } from '@nestjs/common';
 import { AccessControl } from 'accesscontrol';
+import { AclService } from '../service';
+import { AclRulesCreator, IAclRulesCreatorOptions } from '../interfaces';
+
+export const canDoSomething: AclRulesCreator = (opts: IAclRulesCreatorOptions) => {
+    const {
+        context: { user },
+        rolesBuilder,
+        data
+    } = opts;
+
+    if (!user) {
+        throw new UnauthorizedException();
+    }
+
+    return [
+        {
+            req: rolesBuilder.can(user.roles).createAny('Something')
+        },
+        {
+            req: rolesBuilder.can(user.roles).createOwn('Something'),
+            check: () => user.id === data.userId
+        },
+        {
+            req: rolesBuilder.can(user.roles).createOwn('SomethingError'),
+            check: () => new Error('custom error')
+        }
+    ];
+};
 
 let mod: TestingModule;
 let service: AclService;
@@ -25,7 +51,7 @@ beforeAll(async () => {
         imports: [AclModule.register(roleBuilder)]
     }).compile();
     service = mod.get<AclService>(AclService);
-    initAcl(service);
+    service.registerRules('canDoSomething', canDoSomething);
 });
 
 describe('AclService', () => {
