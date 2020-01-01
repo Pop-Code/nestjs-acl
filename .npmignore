@@ -9,3 +9,5 @@ coverage
 yarn.lock
 .vscode
 *.tgz
+.github
+renovate.json
