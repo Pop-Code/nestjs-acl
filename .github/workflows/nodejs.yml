@@ -22,5 +22,10 @@ jobs:
         yarn install
         yarn run build
         yarn run test
-      env:
+    - name: Codecov
+      uses: codecov/codecov-action@v1.0.5
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        file: ./coverage/clover.xml
+        fail_ci_if_error: true
         CI: true
