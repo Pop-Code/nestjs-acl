@@ -1,6 +1,5 @@
 # Nestjs ACL
 
-[![CircleCI](https://circleci.com/gh/Pop-Code/nestjs-acl.svg?style=shield)][ci]
 [![codecov](https://codecov.io/gh/Pop-Code/nestjs-acl/branch/master/graph/badge.svg)][codecov]
 [![NPM Downloads](https://img.shields.io/npm/dm/nestjs-acl.svg?style=flat)][npmchart]
 [![npm](https://img.shields.io/node/v/carbon.svg?style=flat)][npm]
