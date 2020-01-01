@@ -1,6 +1,6 @@
 {
     "name": "nestjs-acl",
-    "version": "0.0.1-alpha.2",
+    "version": "0.0.1",
     "description": "A nestjs package to check acl rules at runtime",
     "author": "Rmannn <alex.hermann@pop-code.com>",
     "repository": "https://github.com/POP-CODE/nestjs-acl.git",
