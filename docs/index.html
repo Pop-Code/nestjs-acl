@@ -62,6 +62,184 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
+				<a href="#nestjs-acl" id="nestjs-acl" style="color: inherit; text-decoration: none;">
+					<h1>Nestjs ACL</h1>
+				</a>
+				<p><a href="https://circleci.com/gh/Pop-Code/nestjs-acl"><img src="https://circleci.com/gh/Pop-Code/nestjs-acl.svg?style=shield" alt="CircleCI"></a>
+					<a href="https://codecov.io/gh/Pop-Code/nestjs-acl"><img src="https://codecov.io/gh/Pop-Code/nestjs-acl/branch/master/graph/badge.svg" alt="codecov"></a>
+					<a href="https://npmcharts.com/compare/nestjs-acl?minimal=true"><img src="https://img.shields.io/npm/dm/nestjs-acl.svg?style=flat" alt="NPM Downloads"></a>
+				<a href="https://www.npmjs.com/package/nestjs-acl"><img src="https://img.shields.io/node/v/carbon.svg?style=flat" alt="npm"></a></p>
+				<a href="#why-the-nestjs-acl-module" id="why-the-nestjs-acl-module" style="color: inherit; text-decoration: none;">
+					<h2>Why the nestjs-acl module?</h2>
+				</a>
+				<p>The <a href="https://www.npmjs.com/package/nestjs-acl">nestjs-acl</a> module purpose is to check several access rules at the same time, depending on the current context.<br>It allows to store, manage and check scenarios of access rules and to check them at any time.</p>
+				<p>In our case, we needed to finely filter access to different types of resources for different types of users.
+				Because some scenarios are repetitive, it was important to store these rules without repeating tones of code lines.</p>
+				<p><a href="https://www.npmjs.com/package/nestjs-acl">nestjs-acl</a> does not replace the nest-access-control module, they are fully compatible and complementary.
+				nest-access-control is a module to protect methods using decorators. It also allows you to implement your own access logic using the Nestjs Guards, which covers most cases.</p>
+				<a href="#install" id="install" style="color: inherit; text-decoration: none;">
+					<h2>Install</h2>
+				</a>
+				<a href="#using-npm" id="using-npm" style="color: inherit; text-decoration: none;">
+					<h4>Using npm</h4>
+				</a>
+				<p><code>npm install accesscontrol nestjs-acl --save</code></p>
+				<a href="#using-yarn" id="using-yarn" style="color: inherit; text-decoration: none;">
+					<h4>Using yarn</h4>
+				</a>
+				<p><code>yarn add accesscontrol nestjs-acl</code></p>
+				<a href="#prepare-the-roles" id="prepare-the-roles" style="color: inherit; text-decoration: none;">
+					<h3>Prepare the roles</h3>
+				</a>
+				<p>Create a file that exports an AccessControl instance.
+				You can refer to the npm package <a href="https://www.npmjs.com/package/commander">accesscontrol</a> to learn how to manipulate roles</p>
+				<p><em>Note: The roles instance could be manipulate at runtime</em></p>
+				<pre><code class="language-ts"><span class="hljs-comment">// roles.ts</span>
+<span class="hljs-keyword">import</span> { AccessControl } <span class="hljs-keyword">from</span> <span class="hljs-string">'accesscontrol'</span>;
+
+<span class="hljs-comment">// See npm package accesscontrol for details</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> roles = <span class="hljs-keyword">new</span> AccessControl({
+    ADMIN: {
+        doSomething: {
+            <span class="hljs-string">'create:any'</span>: [<span class="hljs-string">'*'</span>]
+        },
+        doSomethingElse: {
+            <span class="hljs-string">'create:any'</span>: [<span class="hljs-string">'*'</span>]
+        }
+    },
+    USER: {
+        doSomething: {
+            <span class="hljs-string">'create:own'</span>: [<span class="hljs-string">'*'</span>]
+        }
+    }
+});</code></pre>
+				<a href="#create-and-register-aclrulescreators" id="create-and-register-aclrulescreators" style="color: inherit; text-decoration: none;">
+					<h3>Create and register AclRulesCreators</h3>
+				</a>
+				<ol>
+					<li>When testing acl, the AclService will search for matching AclRulesCreator and execute them passing the context.</li>
+					<li>If a AclRulesCreator is not found, the check passes.</li>
+					<li>If a AclRulesCreator is found, The creator is executed.</li>
+					<li>Returned Rules from AclRulesCreator are tested<ul>
+							<li>The first rule that is granted will validate the test.</li>
+							<li>The first rule that throw an Error will stop the chain and invalidate the test.</li>
+							<li>Rules returning false are ignored</li>
+							<li>Rules returning Error are concatenated, returned as a single Error if no granted rule was found</li>
+						</ul>
+					</li>
+				</ol>
+				<pre><code class="language-ts"><span class="hljs-comment">// rules.ts</span>
+
+<span class="hljs-comment">/**
+ * Based on roles
+ * users with the USER role will pass this scenarios only if they own the data (check returns true)
+ * users with the ADMIN role will pass this scenarios
+ */</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> userCanDoSomething = <span class="hljs-function"><span class="hljs-params">opts</span> =&gt;</span> {
+    <span class="hljs-keyword">const</span> {
+        context: { user }, <span class="hljs-comment">// the context passed to the test</span>
+        data, <span class="hljs-comment">// the data passed to the test</span>
+        sourceData <span class="hljs-comment">// the source data passed to the test</span>
+    } = opts;
+    <span class="hljs-keyword">return</span> [
+        <span class="hljs-comment">// rule 1</span>
+        {
+            req: opts.rolesBuilder.can(opts.context.user.roles).createOwn(<span class="hljs-string">'doSomething'</span>),
+            <span class="hljs-comment">// do an extra check if with context</span>
+            check: <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> opts.data.user === context.user
+        },
+        <span class="hljs-comment">// rule 2</span>
+        {
+            req: opts.rolesBuilder.can(opts.context.user.roles).createAny(<span class="hljs-string">'doSomething'</span>)
+        }
+    ];
+};
+
+<span class="hljs-comment">/**
+ * Based on roles, only users with ADMIN role will be ale to pass this scenarios
+ */</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> userCanDoSomethingElse = <span class="hljs-function"><span class="hljs-params">opts</span> =&gt;</span> {
+    <span class="hljs-keyword">return</span> [
+        {
+            req: opts.rolesBuilder.can(opts.context.user.roles).createAny(<span class="hljs-string">'doSomethingElse'</span>)
+        }
+    ];
+};</code></pre>
+				<a href="#import-and-register-the-aclmodule-module" id="import-and-register-the-aclmodule-module" style="color: inherit; text-decoration: none;">
+					<h3>Import and register the AclModule module</h3>
+				</a>
+				<p>The AclModule is global and need to be registered once, imported modules can inject the AclService without the need to register the module again.</p>
+				<pre><code class="language-ts"><span class="hljs-comment">// mymodule.ts</span>
+<span class="hljs-keyword">import</span> { AclModule, AclService } <span class="hljs-keyword">from</span> <span class="hljs-string">'nestjs-acl'</span>;
+<span class="hljs-keyword">import</span> { roles } <span class="hljs-keyword">from</span> <span class="hljs-string">'./roles'</span>;
+<span class="hljs-keyword">import</span> { userCanDoSomething, userCanDoSomethingElse } <span class="hljs-keyword">from</span> <span class="hljs-string">'./rules'</span>;
+<span class="hljs-keyword">import</span> { MyProvider } <span class="hljs-keyword">from</span> <span class="hljs-string">'./provider'</span>;
+
+<span class="hljs-meta">@Module</span>({
+    imports: [AclModule.register(roles), MyProvider]
+})
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> MyModule {
+    construtor(<span class="hljs-keyword">protected</span> acl: AclService) {
+        <span class="hljs-comment">// register acl rules creators</span>
+        <span class="hljs-keyword">this</span>.acl
+            .registerRules(<span class="hljs-string">'userCanDoSomething'</span>, userCanDoSomething)
+            .registerRules(<span class="hljs-string">'userCanDoSomethingElse'</span>, userCanDoSomethingElse);
+    }
+}</code></pre>
+				<a href="#protect-a-method-using-the-aclservice" id="protect-a-method-using-the-aclservice" style="color: inherit; text-decoration: none;">
+					<h3>Protect a method using the AclService</h3>
+				</a>
+				<p>In your modules, providers or controllers you can now inject the AclService instance and use it to check acl rules.</p>
+				<pre><code class="language-ts"><span class="hljs-comment">// myprovider.ts</span>
+<span class="hljs-keyword">import</span> { Injectable } <span class="hljs-keyword">from</span> <span class="hljs-string">'@nestjs/common'</span>;
+<span class="hljs-keyword">import</span> { AclService } <span class="hljs-keyword">from</span> <span class="hljs-string">'nestjs-acl'</span>;
+
+<span class="hljs-meta">@Injectable</span>()
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> MyProvider {
+    <span class="hljs-keyword">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">protected</span> acl: AclService</span>) {}
+
+    <span class="hljs-comment">/**
+     * This method is protected by a rule with id userCanDoSomething
+     */</span>
+    <span class="hljs-keyword">async</span> doSomething(user: IRoles&lt;<span class="hljs-built_in">string</span>&gt;) {
+        <span class="hljs-keyword">const</span> data = { foo: <span class="hljs-string">'bar'</span>, user };
+
+        <span class="hljs-comment">// The AclService will throw a ForbiddenException if the check fails.</span>
+        <span class="hljs-keyword">const</span> { rule, data } = <span class="hljs-keyword">await</span> <span class="hljs-keyword">this</span>.acl.check({
+            id: <span class="hljs-string">'userCanDoSomething'</span>,
+            data,
+            context: {
+                user: {
+                    roles: user.roles
+                }
+            }
+        });
+
+        <span class="hljs-comment">// Do something...</span>
+    }
+
+    <span class="hljs-comment">/**
+     * This method is protected by a rule with id userCanDoSomethingElse
+     */</span>
+    <span class="hljs-keyword">async</span> doSomethingElse(user: IRoles&lt;<span class="hljs-built_in">string</span>&gt;) {
+        <span class="hljs-keyword">const</span> { rule, data } = <span class="hljs-keyword">await</span> <span class="hljs-keyword">this</span>.acl.check({
+            id: <span class="hljs-string">'userCanDoSomethingElse'</span>,
+            context: {
+                user: {
+                    roles: user.roles
+                }
+            }
+        });
+
+        <span class="hljs-comment">// Do something else...</span>
+    }
+}</code></pre>
+				<a href="#a-hrefhttpspop-codegithubionestjs-aclapi-documentationa" id="a-hrefhttpspop-codegithubionestjs-aclapi-documentationa" style="color: inherit; text-decoration: none;">
+					<h3><a href="https://pop-code.github.io/nestjs-acl">API DOCUMENTATION</a></h3>
+				</a>
+				<a href="#a-hrefhttpsgithubcompop-codenestjs-aclblobmasterchangelogmdchangeloga" id="a-hrefhttpsgithubcompop-codenestjs-aclblobmasterchangelogmdchangeloga" style="color: inherit; text-decoration: none;">
+					<h3><a href="https://github.com/Pop-Code/nestjs-acl/blob/master/CHANGELOG.md">CHANGELOG</a></h3>
+				</a>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
