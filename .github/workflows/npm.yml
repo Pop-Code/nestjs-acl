@@ -1,6 +1,10 @@
-name: Test
+name: NPM Publish
 
-on: [push]
+on:
+    push:
+        # Sequence of patterns matched against refs/tags
+        tags:
+            - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
 
 jobs:
     build:
@@ -8,7 +12,7 @@ jobs:
 
         strategy:
             matrix:
-                node-version: [8.x, 10.x, 12.x]
+                node-version: [12.x]
 
         steps:
             - uses: actions/checkout@v1
@@ -20,11 +24,8 @@ jobs:
               run: |
                   yarn install
                   yarn run build
-                  yarn run test:cov
-            - name: Codecov
-              uses: codecov/codecov-action@v1.0.5
-              with:
-                  token: ${{ secrets.CODECOV_TOKEN }}
-                  file: ./coverage/clover.xml
-                  fail_ci_if_error: true
-                  CI: true
+            - name: Automated releases for npm packages.
+              uses: mikeal/merge-release@v4.0.7
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
