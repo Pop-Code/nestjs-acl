@@ -25,9 +25,9 @@
         "nest-access-control": "2.0.1"
     },
     "devDependencies": {
-        "@nestjs/core": "6.10.13",
-        "@nestjs/common": "6.10.13",
-        "@nestjs/testing": "6.10.13",
+        "@nestjs/core": "6.11.11",
+        "@nestjs/common": "6.11.11",
+        "@nestjs/testing": "6.11.11",
         "@types/node": "13.1.2",
         "reflect-metadata": "0.1.13",
         "rxjs": "6.5.4",
