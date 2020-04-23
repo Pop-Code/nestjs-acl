@@ -6,7 +6,7 @@ tsconfig.*
 typedoc.js
 coverage
 .prettierrc
-pretiierignore
+.pretiierignore
 yarn.lock
 .vscode
 *.tgz
