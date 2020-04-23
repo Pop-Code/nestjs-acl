@@ -5,9 +5,9 @@
     "author": "Rmannn <alex.hermann@pop-code.com>",
     "repository": "https://github.com/POP-CODE/nestjs-acl.git",
     "license": "MIT",
-    "main": "lib/index.js",
+    "main": "dist/index.js",
     "scripts": {
-        "build": "rm -Rf lib && tsc -b",
+        "build": "rm -Rf dist && tsc -b",
         "format": "prettier \"**/*.ts\" --ignore-path ./.prettierignore --write && git status",
         "doc": "rm -Rf ./docs && typedoc ./src && touch ./docs/.nojekyll",
         "lint": "eslint src/**/**.ts",
