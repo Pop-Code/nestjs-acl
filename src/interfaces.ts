@@ -1,4 +1,4 @@
-import { Permission, AccessControl } from 'accesscontrol';
+import { AccessControl, Permission } from 'accesscontrol';
 
 export interface IRoles<Role> {
     roles?: Role[];

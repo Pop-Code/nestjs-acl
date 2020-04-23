@@ -1,21 +1,19 @@
 {
     "compilerOptions": {
         "module": "commonjs",
-        "resolveJsonModule": true,
-        "esModuleInterop": true,
-        "declaration": true,
+        "declaration": false,
         "noImplicitAny": false,
+        "noUnusedLocals": false,
         "removeComments": true,
         "noLib": false,
-        "allowSyntheticDefaultImports": true,
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "target": "es6",
         "sourceMap": true,
-        "declarationMap": true,
-        "outDir": "./lib",
-        "baseUrl": ".",
-        "lib": ["es6", "dom", "esnext.asynciterable"]
+        "allowJs": true,
+        "outDir": "dist",
+        "lib": ["es7"]
     },
-    "exclude": ["node_modules", "**/test/**", "*.spec.ts"]
+    "include": ["src/**/*.ts"],
+    "exclude": ["node_modules"]
 }

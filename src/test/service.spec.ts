@@ -1,10 +1,10 @@
-// tslint:disable-next-line:no-implicit-dependencies
-import { Test, TestingModule } from '@nestjs/testing';
-import { AclModule } from '../module';
 import { ForbiddenException, UnauthorizedException } from '@nestjs/common';
+import { Test, TestingModule } from '@nestjs/testing';
 import { AccessControl } from 'accesscontrol';
-import { AclService } from '../service';
+
 import { AclRulesCreator, IAclRulesCreatorOptions } from '../interfaces';
+import { AclModule } from '../module';
+import { AclService } from '../service';
 
 export const canDoSomething: AclRulesCreator = (opts: IAclRulesCreatorOptions) => {
     const {
@@ -64,7 +64,7 @@ describe('AclService', () => {
         service.setGlobalOptions({
             foo: 'bar'
         });
-        service.registerRules('canReadGlobalOptions', opts => {
+        service.registerRules('canReadGlobalOptions', (opts) => {
             expect(opts).toHaveProperty('foo');
             expect(opts.foo).toBe('bar');
             return [
@@ -183,13 +183,10 @@ describe('AclService', () => {
             ).rejects.toThrow(ForbiddenException);
         });
         it('should not pass the checker with a custom error', async () => {
-            service.registerRules('ruleWithCustomError', opts => {
+            service.registerRules('ruleWithCustomError', (opts) => {
                 return [
                     {
-                        req: service
-                            .getRolesBuilder()
-                            .can('ADMIN')
-                            .createAny('Something'),
+                        req: service.getRolesBuilder().can('ADMIN').createAny('Something'),
                         check: () => new Error('Custom error message')
                     }
                 ];
@@ -202,7 +199,29 @@ describe('AclService', () => {
                 });
             } catch (e) {
                 expect(e).toBeInstanceOf(ForbiddenException);
-                expect(e.message.message).toContain('Custom error message');
+                expect(e.message).toContain('Custom error message');
+            }
+        });
+        it('should not pass the checker with a custom http error', async () => {
+            const error = new ForbiddenException('Custom error message');
+            service.registerRules('ruleWithCustomError', (opts) => {
+                return [
+                    {
+                        req: service.getRolesBuilder().can('ADMIN').createAny('Something'),
+                        check: () => error
+                    }
+                ];
+            });
+            expect.assertions(3);
+            try {
+                await service.check({
+                    id: 'ruleWithCustomError',
+                    context: {}
+                });
+            } catch (e) {
+                expect(e).toBeInstanceOf(ForbiddenException);
+                expect(e).toStrictEqual(error);
+                expect(e.message).toContain('Custom error message');
             }
         });
     });

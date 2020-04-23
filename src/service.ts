@@ -1,8 +1,9 @@
 import { ForbiddenException, HttpException, Injectable } from '@nestjs/common';
 import { AccessControl } from 'accesscontrol';
 import Debug from 'debug';
+
 import { InjectRolesBuilder } from './decorators';
-import { IAclRule, AclRulesCreator, IAclCheckOptions } from './interfaces';
+import { AclRulesCreator, IAclCheckOptions, IAclRule } from './interfaces';
 
 @Injectable()
 export class AclService {
@@ -97,7 +98,7 @@ export class AclService {
         if (!rule) {
             log('Fail, creator did not return any valid rule');
             if (errors.length && !options.message) {
-                options.message = errors.map(e => e.message).join(', ');
+                options.message = errors.map((e) => e.message).join(', ');
             }
             throw new ForbiddenException(options.message);
         }
