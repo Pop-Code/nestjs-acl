@@ -2,10 +2,11 @@ src
 docs
 jest.config.js
 tsconfig.*
-tslint.*
+.eslintrc.js
 typedoc.js
 coverage
 .prettierrc
+pretiierignore
 yarn.lock
 .vscode
 *.tgz
