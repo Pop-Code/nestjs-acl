@@ -17,7 +17,7 @@ export class AclService {
      */
     protected rules: Map<string, AclRulesCreator> = new Map();
 
-    constructor(@InjectRolesBuilder() protected readonly rolesBuilder: AccessControl) { }
+    constructor(@InjectRolesBuilder() protected readonly rolesBuilder: AccessControl) {}
 
     /**
      * Get the role builder instance
