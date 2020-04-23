@@ -3,7 +3,9 @@
 [![Actions Status](https://github.com/Pop-Code/nestjs-acl/workflows/CI/badge.svg)](https://github.com/Pop-Code/nestjs-acl/actions)
 [![codecov](https://codecov.io/gh/Pop-Code/nestjs-acl/branch/master/graph/badge.svg)][codecov]
 [![NPM Downloads](https://img.shields.io/npm/dm/nestjs-acl.svg?style=flat)][npmchart]
-[![npm](https://img.shields.io/node/v/carbon.svg?style=flat)][npm]
+![node](https://img.shields.io/node/v/nestjs-acl)
+![npm (tag)](https://img.shields.io/npm/v/nestjs-console/latest)
+![npm peer dependency version (scoped)](https://img.shields.io/npm/dependency-version/nestjs-console/peer/@nestjs/core)
 
 ## Why the nestjs-acl module?
 
@@ -74,7 +76,7 @@ export const roles = new AccessControl({
  * users with the USER role will pass this scenarios only if they own the data (check returns true)
  * users with the ADMIN role will pass this scenarios
  */
-export const userCanDoSomething = opts => {
+export const userCanDoSomething = (opts) => {
     const {
         context: { user }, // the context passed to the test
         data, // the data passed to the test
@@ -97,7 +99,7 @@ export const userCanDoSomething = opts => {
 /**
  * Based on roles, only users with ADMIN role will be ale to pass this scenarios
  */
-export const userCanDoSomethingElse = opts => {
+export const userCanDoSomethingElse = (opts) => {
     return [
         {
             req: opts.rolesBuilder.can(opts.context.user.roles).createAny('doSomethingElse')
