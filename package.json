@@ -16,7 +16,7 @@
         "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand"
     },
     "peerDependencies": {
-        "@nestjs/common": "^6"
+        "@nestjs/common": "^6 || ^7.0.0"
     },
     "dependencies": {
         "debug": "4.1.1",
