@@ -1,7 +1,9 @@
 {
     "compilerOptions": {
         "module": "commonjs",
-        "declaration": false,
+        "esModuleInterop": true,
+        "declaration": true,
+        "declarationMap": true,
         "noImplicitAny": false,
         "noUnusedLocals": false,
         "removeComments": true,
