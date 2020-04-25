@@ -2,7 +2,7 @@ src
 docs
 jest.config.js
 tsconfig.*
-.eslintrc.js
+.eslintrc
 typedoc.js
 coverage
 .prettierrc

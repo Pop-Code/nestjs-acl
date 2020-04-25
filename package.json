@@ -1,6 +1,6 @@
 {
     "name": "nestjs-acl",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "A nestjs package to check acl rules at runtime",
     "author": "Rmannn <alex.hermann@pop-code.com>",
     "repository": "https://github.com/POP-CODE/nestjs-acl.git",
@@ -16,7 +16,7 @@
         "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand"
     },
     "peerDependencies": {
-        "@nestjs/common": "^6"
+        "@nestjs/common": "^6 || ^7"
     },
     "dependencies": {
         "debug": "4.1.1",
@@ -25,9 +25,9 @@
         "nest-access-control": "2.0.1"
     },
     "devDependencies": {
-        "@nestjs/core": "7.0.8",
-        "@nestjs/common": "7.0.8",
-        "@nestjs/testing": "7.0.8",
+        "@nestjs/core": "7.0.9",
+        "@nestjs/common": "7.0.9",
+        "@nestjs/testing": "7.0.9",
         "@types/node": "13.13.2",
         "reflect-metadata": "0.1.13",
         "rxjs": "6.5.5",
@@ -46,6 +46,24 @@
         "@types/jest": "25.2.1",
         "@types/debug": "4.1.5",
         "eslint-config-prettier": "6.11.0"
+    },
+    "jest": {
+        "moduleFileExtensions": [
+            "js",
+            "json",
+            "ts"
+        ],
+        "rootDir": "src",
+        "testRegex": ".spec.ts$",
+        "transform": {
+            "^.+\\.(t|j)s$": "ts-jest"
+        },
+        "collectCoverageFrom": [
+            "**/*.{js,jsx,ts}",
+            "!index.ts",
+            "!**/test/**"
+        ],
+        "coverageDirectory": "../coverage"
     },
     "engines": {
         "node": ">=0.10"
