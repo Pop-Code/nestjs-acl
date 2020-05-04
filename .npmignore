@@ -1,6 +1,5 @@
 src
 docs
-jest.config.js
 tsconfig.*
 .eslintrc
 typedoc.js
@@ -12,3 +11,4 @@ yarn.lock
 *.tgz
 .github
 renovate.json
+dist/test
