@@ -3,6 +3,11 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.1]
+
+### Fixed
+- Make service options persistant
+
 ## [0.2.0]
 
 ### Changed
@@ -11,5 +16,6 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Added
 - Add a global/check options "rejectIfNoRule". If true the service will throw an exception if no acl rule was found. This allow to ensure the implementation of a rule was done.
 
-[unreleased]: https://github.com/Pop-Code/nestjs-console/compare/v0.2.0...HEAD
+[unreleased]: https://github.com/Pop-Code/nestjs-console/compare/v0.2.1...HEAD
+[0.2.1]: https://github.com/Pop-Code/nestjs-console/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/Pop-Code/nestjs-console/compare/v0.1.2...v0.2.0

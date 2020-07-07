@@ -40,7 +40,7 @@ export class AclService {
      * @see globalOptions
      */
     setGlobalOptions(globalOptions: AclModuleOptions & { [key: string]: any }) {
-        this.globalOptions = globalOptions;
+        this.globalOptions = Object.assign({}, this.options, globalOptions);
     }
 
     /**
