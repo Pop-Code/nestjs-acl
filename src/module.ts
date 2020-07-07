@@ -1,7 +1,9 @@
-import { Module, Global, DynamicModule } from '@nestjs/common';
-import { AclService } from './service';
+import { DynamicModule, Global, Module } from '@nestjs/common';
 import { AccessControl } from 'accesscontrol';
-import { ROLES_BUILDER_TOKEN } from './constants';
+
+import { OPTIONS_TOKEN, ROLES_BUILDER_TOKEN } from './constants';
+import { AclModuleOptions } from './interfaces';
+import { AclService } from './service';
 
 /**
  * The AclModule will do 2 things
@@ -14,15 +16,20 @@ export class AclModule {
     /**
      * Register the AclModule.
      */
-    static async register(roles: AccessControl): Promise<DynamicModule> {
+    static async register(roles: AccessControl, options: AclModuleOptions = {}): Promise<DynamicModule> {
         const rolesBuilderProvider = {
             provide: ROLES_BUILDER_TOKEN,
             useValue: roles
         };
+        const optionsProvider = {
+            provide: OPTIONS_TOKEN,
+            useValue: options
+        };
+
         return {
             module: AclModule,
-            providers: [rolesBuilderProvider, AclService],
-            exports: [rolesBuilderProvider, AclService]
+            providers: [rolesBuilderProvider, optionsProvider, AclService],
+            exports: [rolesBuilderProvider, optionsProvider, AclService]
         };
     }
 }

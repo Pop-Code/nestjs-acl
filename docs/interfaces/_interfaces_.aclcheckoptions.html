@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>IAclCheckOptions | Nestjs ACL Documentation</title>
+	<title>AclCheckOptions | Nestjs ACL Documentation</title>
 	<meta name="description" content="Documentation for Nestjs ACL Documentation">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -57,16 +57,23 @@
 					<a href="../modules/_interfaces_.html">&quot;interfaces&quot;</a>
 				</li>
 				<li>
-					<a href="_interfaces_.iaclcheckoptions.html">IAclCheckOptions</a>
+					<a href="_interfaces_.aclcheckoptions.html">AclCheckOptions</a>
 				</li>
 			</ul>
-			<h1>Interface IAclCheckOptions&lt;Data, Source, Context&gt;</h1>
+			<h1>Interface AclCheckOptions&lt;Data, Source, Context&gt;</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>The options to pass to the checker</p>
+					</div>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-type-parameters">
 				<h3>Type parameters</h3>
 				<ul class="tsd-type-parameters">
@@ -77,7 +84,7 @@
 						<h4>Source</h4>
 					</li>
 					<li>
-						<h4>Context<span class="tsd-signature-symbol">: </span><a href="_interfaces_.iaclcontext.html" class="tsd-signature-type">IAclContext</a></h4>
+						<h4>Context<span class="tsd-signature-symbol">: </span><a href="_interfaces_.aclcontext.html" class="tsd-signature-type">AclContext</a></h4>
 					</li>
 				</ul>
 			</section>
@@ -85,10 +92,10 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">IAclCheckOptions</span>
+						<span class="target">AclCheckOptions</span>
 						<ul class="tsd-hierarchy">
 							<li>
-								<a href="_interfaces_.iaclrulescreatoroptions.html" class="tsd-signature-type">IAclRulesCreatorOptions</a>
+								<a href="_interfaces_.aclrulescreatoroptions.html" class="tsd-signature-type">AclRulesCreatorOptions</a>
 							</li>
 						</ul>
 					</li>
@@ -97,6 +104,11 @@
 			<section class="tsd-panel tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter">
 				<h3 class="tsd-before-signature">Indexable</h3>
 				<div class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">any</span></div>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Any other key/value you want to pass to the checker, those options will be readable in the rule creator function</p>
+					</div>
+				</div>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
 				<h2>Index</h2>
@@ -105,11 +117,12 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_interfaces_.iaclcheckoptions.html#context" class="tsd-kind-icon">context</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_interfaces_.iaclcheckoptions.html#data" class="tsd-kind-icon">data</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_interfaces_.iaclcheckoptions.html#id" class="tsd-kind-icon">id</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_interfaces_.iaclcheckoptions.html#message" class="tsd-kind-icon">message</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_interfaces_.iaclcheckoptions.html#sourcedata" class="tsd-kind-icon">source<wbr>Data</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_interfaces_.aclcheckoptions.html#context" class="tsd-kind-icon">context</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_interfaces_.aclcheckoptions.html#data" class="tsd-kind-icon">data</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_interfaces_.aclcheckoptions.html#id" class="tsd-kind-icon">id</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_interfaces_.aclcheckoptions.html#message" class="tsd-kind-icon">message</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_interfaces_.aclcheckoptions.html#rejectifnorule" class="tsd-kind-icon">reject<wbr>IfNo<wbr>Rule</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_interfaces_.aclcheckoptions.html#sourcedata" class="tsd-kind-icon">source<wbr>Data</a></li>
 							</ul>
 						</section>
 					</div>
@@ -123,9 +136,14 @@
 					<div class="tsd-signature tsd-kind-icon">context<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Context</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Pop-Code/nestjs-acl/blob/49ab8c1/src/interfaces.ts#L19">src/interfaces.ts:19</a></li>
+							<li>Defined in <a href="https://github.com/Pop-Code/nestjs-acl/blob/77f68a0/src/interfaces.ts#L48">src/interfaces.ts:48</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The context</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="data" class="tsd-anchor"></a>
@@ -133,9 +151,14 @@
 					<div class="tsd-signature tsd-kind-icon">data<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Data</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Pop-Code/nestjs-acl/blob/49ab8c1/src/interfaces.ts#L20">src/interfaces.ts:20</a></li>
+							<li>Defined in <a href="https://github.com/Pop-Code/nestjs-acl/blob/77f68a0/src/interfaces.ts#L53">src/interfaces.ts:53</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The data to check</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="id" class="tsd-anchor"></a>
@@ -143,9 +166,14 @@
 					<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Pop-Code/nestjs-acl/blob/49ab8c1/src/interfaces.ts#L18">src/interfaces.ts:18</a></li>
+							<li>Defined in <a href="https://github.com/Pop-Code/nestjs-acl/blob/77f68a0/src/interfaces.ts#L43">src/interfaces.ts:43</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The id of the rule</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="message" class="tsd-anchor"></a>
@@ -153,9 +181,29 @@
 					<div class="tsd-signature tsd-kind-icon">message<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Pop-Code/nestjs-acl/blob/49ab8c1/src/interfaces.ts#L22">src/interfaces.ts:22</a></li>
+							<li>Defined in <a href="https://github.com/Pop-Code/nestjs-acl/blob/77f68a0/src/interfaces.ts#L63">src/interfaces.ts:63</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A custom message to pass to the ForbiddenException</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="rejectifnorule" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> reject<wbr>IfNo<wbr>Rule</h3>
+					<div class="tsd-signature tsd-kind-icon">reject<wbr>IfNo<wbr>Rule<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/Pop-Code/nestjs-acl/blob/77f68a0/src/interfaces.ts#L68">src/interfaces.ts:68</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Will reject the check if no rule creator found or if the creator returns no rule</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="sourcedata" class="tsd-anchor"></a>
@@ -163,9 +211,14 @@
 					<div class="tsd-signature tsd-kind-icon">source<wbr>Data<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Source</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Pop-Code/nestjs-acl/blob/49ab8c1/src/interfaces.ts#L21">src/interfaces.ts:21</a></li>
+							<li>Defined in <a href="https://github.com/Pop-Code/nestjs-acl/blob/77f68a0/src/interfaces.ts#L58">src/interfaces.ts:58</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The source data, used to represent the data that are modified</p>
+						</div>
+					</div>
 				</section>
 			</section>
 		</div>
@@ -200,38 +253,44 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter">
-						<a href="_interfaces_.iaclcheckoptions.html" class="tsd-kind-icon">IAcl<wbr>Check<wbr>Options</a>
+						<a href="_interfaces_.aclcheckoptions.html" class="tsd-kind-icon">Acl<wbr>Check<wbr>Options</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_interfaces_.iaclcheckoptions.html#context" class="tsd-kind-icon">context</a>
+								<a href="_interfaces_.aclcheckoptions.html#context" class="tsd-kind-icon">context</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_interfaces_.iaclcheckoptions.html#data" class="tsd-kind-icon">data</a>
+								<a href="_interfaces_.aclcheckoptions.html#data" class="tsd-kind-icon">data</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_interfaces_.iaclcheckoptions.html#id" class="tsd-kind-icon">id</a>
+								<a href="_interfaces_.aclcheckoptions.html#id" class="tsd-kind-icon">id</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_interfaces_.iaclcheckoptions.html#message" class="tsd-kind-icon">message</a>
+								<a href="_interfaces_.aclcheckoptions.html#message" class="tsd-kind-icon">message</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_interfaces_.iaclcheckoptions.html#sourcedata" class="tsd-kind-icon">source<wbr>Data</a>
+								<a href="_interfaces_.aclcheckoptions.html#rejectifnorule" class="tsd-kind-icon">reject<wbr>IfNo<wbr>Rule</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_interfaces_.aclcheckoptions.html#sourcedata" class="tsd-kind-icon">source<wbr>Data</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
 					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter">
-						<a href="_interfaces_.iaclcontext.html" class="tsd-kind-icon">IAcl<wbr>Context</a>
+						<a href="_interfaces_.aclcontext.html" class="tsd-kind-icon">Acl<wbr>Context</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="_interfaces_.iaclrule.html" class="tsd-kind-icon">IAcl<wbr>Rule</a>
+						<a href="_interfaces_.aclmoduleoptions.html" class="tsd-kind-icon">Acl<wbr>Module<wbr>Options</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter">
-						<a href="_interfaces_.iaclrulescreatoroptions.html" class="tsd-kind-icon">IAcl<wbr>Rules<wbr>Creator<wbr>Options</a>
+						<a href="_interfaces_.aclroles.html" class="tsd-kind-icon">Acl<wbr>Roles</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="_interfaces_.aclrule.html" class="tsd-kind-icon">Acl<wbr>Rule</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter">
-						<a href="_interfaces_.iroles.html" class="tsd-kind-icon">IRoles</a>
+						<a href="_interfaces_.aclrulescreatoroptions.html" class="tsd-kind-icon">Acl<wbr>Rules<wbr>Creator<wbr>Options</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
 						<a href="../modules/_interfaces_.html#aclrulescreator" class="tsd-kind-icon">Acl<wbr>Rules<wbr>Creator</a>
@@ -263,6 +322,5 @@
 </footer>
 <div class="overlay"></div>
 <script src="../assets/js/main.js"></script>
-<script>if (location.protocol == 'file:') document.write('<script src="../assets/js/search.js"><' + '/script>');</script>
 </body>
 </html>

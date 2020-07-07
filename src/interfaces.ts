@@ -1,33 +1,89 @@
 import { AccessControl, Permission } from 'accesscontrol';
 
-export interface IRoles<Role> {
+/**
+ * The options of the module
+ */
+export interface AclModuleOptions {
+    /**
+     * Will reject the check if no rule creator found or if the creator returns no rule
+     */
+    rejectIfNoRule?: boolean
+}
+
+/**
+ * The interface of the entity implementing roles. Usually this is your user entity
+ */
+export interface AclRoles<Role> {
     roles?: Role[];
 }
 
-export interface IAclRule {
+/**
+ * An Acl Rule
+ */
+export interface AclRule {
     req?: Permission;
     res?: Permission;
     check?: () => (boolean | Error) | Promise<boolean | Error>;
 }
 
-export interface IAclContext<R = any, User extends IRoles<R> = any> {
+/**
+ * The context of a request
+ */
+export interface AclContext<R = any, User extends AclRoles<R> = any> {
     user?: User;
 }
 
-export interface IAclCheckOptions<Data = any, Source = any, Context extends IAclContext = any> {
+/**
+ * The options to pass to the checker
+ */
+export interface AclCheckOptions<Data = any, Source = any, Context extends AclContext = any> {
+    /**
+     * The id of the rule
+     */
     id: string;
+
+    /**
+     * The context
+     */
     context: Context;
+
+    /**
+     * The data to check
+     */
     data?: Data;
+
+    /**
+     * The source data, used to represent the data that are modified
+     */
     sourceData?: Source;
+
+    /**
+     * A custom message to pass to the ForbiddenException
+     */
     message?: string;
+
+    /**
+     * Will reject the check if no rule creator found or if the creator returns no rule
+     */
+    rejectIfNoRule?: boolean;
+
+    /**
+     * Any other key/value you want to pass to the checker, those options will be readable in the rule creator function
+     */
     [key: string]: any;
 }
 
-export interface IAclRulesCreatorOptions<Data = any, Source = any, Context extends IAclContext = any>
-    extends IAclCheckOptions<Data, Source, Context> {
+/**
+ * Th options the checker will receive as argument
+ */
+export interface AclRulesCreatorOptions<Data = any, Source = any, Context extends AclContext = any>
+    extends AclCheckOptions<Data, Source, Context> {
     rolesBuilder: AccessControl;
 }
 
-export type AclRulesCreator<Data = any, Source = any, Context extends IAclContext = any> = (
-    options: IAclRulesCreatorOptions<Data, Source, Context>
-) => IAclRule[] | Promise<IAclRule[]>;
+/**
+ * The signature of a acl rule creator
+ */
+export type AclRulesCreator<Data = any, Source = any, Context extends AclContext = any> = (
+    options: AclRulesCreatorOptions<Data, Source, Context>
+) => AclRule[] | Promise<AclRule[]>;

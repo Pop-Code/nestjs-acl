@@ -97,21 +97,21 @@
 				You can refer to the npm package <a href="https://www.npmjs.com/package/commander">accesscontrol</a> to learn how to manipulate roles</p>
 				<p><em>Note: The roles instance could be manipulate at runtime</em></p>
 				<pre><code class="language-ts"><span class="hljs-comment">// roles.ts</span>
-<span class="hljs-keyword">import</span> { AccessControl } <span class="hljs-keyword">from</span> <span class="hljs-string">'accesscontrol'</span>;
+<span class="hljs-keyword">import</span> { AccessControl } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;accesscontrol&#x27;</span>;
 
 <span class="hljs-comment">// See npm package accesscontrol for details</span>
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> roles = <span class="hljs-keyword">new</span> AccessControl({
     ADMIN: {
         doSomething: {
-            <span class="hljs-string">'create:any'</span>: [<span class="hljs-string">'*'</span>]
+            <span class="hljs-string">&#x27;create:any&#x27;</span>: [<span class="hljs-string">&#x27;*&#x27;</span>]
         },
         doSomethingElse: {
-            <span class="hljs-string">'create:any'</span>: [<span class="hljs-string">'*'</span>]
+            <span class="hljs-string">&#x27;create:any&#x27;</span>: [<span class="hljs-string">&#x27;*&#x27;</span>]
         }
     },
     USER: {
         doSomething: {
-            <span class="hljs-string">'create:own'</span>: [<span class="hljs-string">'*'</span>]
+            <span class="hljs-string">&#x27;create:own&#x27;</span>: [<span class="hljs-string">&#x27;*&#x27;</span>]
         }
     }
 });</code></pre>
@@ -119,9 +119,9 @@
 					<h3>Create and register AclRulesCreators</h3>
 				</a>
 				<ol>
-					<li>When testing acl, the AclService will search for matching AclRulesCreator and execute them passing the context.</li>
-					<li>If a AclRulesCreator is not found, the check passes.</li>
-					<li>If a AclRulesCreator is found, The creator is executed.</li>
+					<li>The AclService will search for matching AclRulesCreator and execute them passing the context.</li>
+					<li>If a AclRulesCreator is not found, the check passes (only if option rejectIfNoRule === false)</li>
+					<li>If a AclRulesCreator is found, The creator is executed. if option rejectIfNoRule === true and no rule was returned by the creator, the check will fail.</li>
 					<li>Returned Rules from AclRulesCreator are tested<ul>
 							<li>The first rule that is granted will validate the test.</li>
 							<li>The first rule that throw an Error will stop the chain and invalidate the test.</li>
@@ -146,13 +146,13 @@
     <span class="hljs-keyword">return</span> [
         <span class="hljs-comment">// rule 1</span>
         {
-            req: opts.rolesBuilder.can(opts.context.user.roles).createOwn(<span class="hljs-string">'doSomething'</span>),
+            req: opts.rolesBuilder.can(opts.context.user.roles).createOwn(<span class="hljs-string">&#x27;doSomething&#x27;</span>),
             <span class="hljs-comment">// do an extra check if with context</span>
-            check: <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> opts.data.user === context.user
+            check: <span class="hljs-function">() =&gt;</span> opts.data.user === context.user
         },
         <span class="hljs-comment">// rule 2</span>
         {
-            req: opts.rolesBuilder.can(opts.context.user.roles).createAny(<span class="hljs-string">'doSomething'</span>)
+            req: opts.rolesBuilder.can(opts.context.user.roles).createAny(<span class="hljs-string">&#x27;doSomething&#x27;</span>)
         }
     ];
 };
@@ -163,7 +163,7 @@
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> userCanDoSomethingElse = <span class="hljs-function">(<span class="hljs-params">opts</span>) =&gt;</span> {
     <span class="hljs-keyword">return</span> [
         {
-            req: opts.rolesBuilder.can(opts.context.user.roles).createAny(<span class="hljs-string">'doSomethingElse'</span>)
+            req: opts.rolesBuilder.can(opts.context.user.roles).createAny(<span class="hljs-string">&#x27;doSomethingElse&#x27;</span>)
         }
     ];
 };</code></pre>
@@ -172,10 +172,10 @@
 				</a>
 				<p>The AclModule is global and need to be registered once, imported modules can inject the AclService without the need to register the module again.</p>
 				<pre><code class="language-ts"><span class="hljs-comment">// mymodule.ts</span>
-<span class="hljs-keyword">import</span> { AclModule, AclService } <span class="hljs-keyword">from</span> <span class="hljs-string">'nestjs-acl'</span>;
-<span class="hljs-keyword">import</span> { roles } <span class="hljs-keyword">from</span> <span class="hljs-string">'./roles'</span>;
-<span class="hljs-keyword">import</span> { userCanDoSomething, userCanDoSomethingElse } <span class="hljs-keyword">from</span> <span class="hljs-string">'./rules'</span>;
-<span class="hljs-keyword">import</span> { MyProvider } <span class="hljs-keyword">from</span> <span class="hljs-string">'./provider'</span>;
+<span class="hljs-keyword">import</span> { AclModule, AclService } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;nestjs-acl&#x27;</span>;
+<span class="hljs-keyword">import</span> { roles } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./roles&#x27;</span>;
+<span class="hljs-keyword">import</span> { userCanDoSomething, userCanDoSomethingElse } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./rules&#x27;</span>;
+<span class="hljs-keyword">import</span> { MyProvider } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./provider&#x27;</span>;
 
 <span class="hljs-meta">@Module</span>({
     imports: [AclModule.register(roles), MyProvider]
@@ -183,9 +183,9 @@
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> MyModule {
     construtor(<span class="hljs-keyword">protected</span> acl: AclService) {
         <span class="hljs-comment">// register acl rules creators</span>
-        <span class="hljs-keyword">this</span>.acl
-            .registerRules(<span class="hljs-string">'userCanDoSomething'</span>, userCanDoSomething)
-            .registerRules(<span class="hljs-string">'userCanDoSomethingElse'</span>, userCanDoSomethingElse);
+        <span class="hljs-built_in">this</span>.acl
+            .registerRules(<span class="hljs-string">&#x27;userCanDoSomething&#x27;</span>, userCanDoSomething)
+            .registerRules(<span class="hljs-string">&#x27;userCanDoSomethingElse&#x27;</span>, userCanDoSomethingElse);
     }
 }</code></pre>
 				<a href="#using-the-aclservice" id="using-the-aclservice" style="color: inherit; text-decoration: none;">
@@ -193,8 +193,8 @@
 				</a>
 				<p>In your modules, providers or controllers you can now inject the AclService instance and use it to check acl rules.</p>
 				<pre><code class="language-ts"><span class="hljs-comment">// myprovider.ts</span>
-<span class="hljs-keyword">import</span> { Injectable } <span class="hljs-keyword">from</span> <span class="hljs-string">'@nestjs/common'</span>;
-<span class="hljs-keyword">import</span> { AclService } <span class="hljs-keyword">from</span> <span class="hljs-string">'nestjs-acl'</span>;
+<span class="hljs-keyword">import</span> { Injectable } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@nestjs/common&#x27;</span>;
+<span class="hljs-keyword">import</span> { AclService } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;nestjs-acl&#x27;</span>;
 
 <span class="hljs-meta">@Injectable</span>()
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> MyProvider {
@@ -203,12 +203,12 @@
     <span class="hljs-comment">/**
      * This method is protected by a rule with id userCanDoSomething
      */</span>
-    <span class="hljs-keyword">async</span> doSomething(user: IRoles&lt;<span class="hljs-built_in">string</span>&gt;) {
-        <span class="hljs-keyword">const</span> data = { foo: <span class="hljs-string">'bar'</span>, user };
+    <span class="hljs-keyword">async</span> doSomething(user: AclRoles&lt;<span class="hljs-built_in">string</span>&gt;) {
+        <span class="hljs-keyword">const</span> data = { foo: <span class="hljs-string">&#x27;bar&#x27;</span>, user };
 
         <span class="hljs-comment">// The AclService will throw a ForbiddenException if the check fails.</span>
-        <span class="hljs-keyword">const</span> { rule, data } = <span class="hljs-keyword">await</span> <span class="hljs-keyword">this</span>.acl.check({
-            id: <span class="hljs-string">'userCanDoSomething'</span>,
+        <span class="hljs-keyword">const</span> { rule, data } = <span class="hljs-keyword">await</span> <span class="hljs-built_in">this</span>.acl.check({
+            id: <span class="hljs-string">&#x27;userCanDoSomething&#x27;</span>,
             data,
             context: {
                 user: {
@@ -223,9 +223,9 @@
     <span class="hljs-comment">/**
      * This method is protected by a rule with id userCanDoSomethingElse
      */</span>
-    <span class="hljs-keyword">async</span> doSomethingElse(user: IRoles&lt;<span class="hljs-built_in">string</span>&gt;) {
-        <span class="hljs-keyword">const</span> { rule, data } = <span class="hljs-keyword">await</span> <span class="hljs-keyword">this</span>.acl.check({
-            id: <span class="hljs-string">'userCanDoSomethingElse'</span>,
+    <span class="hljs-keyword">async</span> doSomethingElse(user: AclRoles&lt;<span class="hljs-built_in">string</span>&gt;) {
+        <span class="hljs-keyword">const</span> { rule, data } = <span class="hljs-keyword">await</span> <span class="hljs-built_in">this</span>.acl.check({
+            id: <span class="hljs-string">&#x27;userCanDoSomethingElse&#x27;</span>,
             context: {
                 user: {
                     roles: user.roles
@@ -298,6 +298,5 @@
 </footer>
 <div class="overlay"></div>
 <script src="assets/js/main.js"></script>
-<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
 </body>
 </html>

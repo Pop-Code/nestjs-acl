@@ -2,11 +2,11 @@ import { ForbiddenException, UnauthorizedException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { AccessControl } from 'accesscontrol';
 
-import { AclRulesCreator, IAclRulesCreatorOptions } from '../interfaces';
+import { AclRulesCreator, AclRulesCreatorOptions } from '../interfaces';
 import { AclModule } from '../module';
 import { AclService } from '../service';
 
-export const canDoSomething: AclRulesCreator = (opts: IAclRulesCreatorOptions) => {
+export const canDoSomething: AclRulesCreator = (opts: AclRulesCreatorOptions) => {
     const {
         context: { user },
         rolesBuilder,
@@ -32,29 +32,37 @@ export const canDoSomething: AclRulesCreator = (opts: IAclRulesCreatorOptions) =
     ];
 };
 
+export const creatorWithNoRule: AclRulesCreator = () => {
+    return [];
+}
+
+
 let mod: TestingModule;
 let service: AclService;
-beforeAll(async () => {
-    const roleBuilder = new AccessControl({
-        USER: {
-            Something: {
-                'create:own': ['*']
-            }
-        },
-        ADMIN: {
-            Something: {
-                'create:any': ['*']
-            }
+const roleBuilder = new AccessControl({
+    USER: {
+        Something: {
+            'create:own': ['*']
         }
-    });
-    mod = await Test.createTestingModule({
-        imports: [AclModule.register(roleBuilder)]
-    }).compile();
-    service = mod.get<AclService>(AclService);
-    service.registerRules('canDoSomething', canDoSomething);
+    },
+    ADMIN: {
+        Something: {
+            'create:any': ['*']
+        }
+    }
 });
 
+
+
 describe('AclService', () => {
+    beforeAll(async () => {    
+        mod = await Test.createTestingModule({
+            imports: [AclModule.register(roleBuilder)]
+        }).compile();
+        service = mod.get<AclService>(AclService);
+        service.registerRules('canDoSomething', canDoSomething);
+        service.registerRules('creatorWithNoRule', creatorWithNoRule);
+    });
     it('should has a role builder', () => {
         const rb = service.getRolesBuilder();
         expect(rb).toBeInstanceOf(AccessControl);
@@ -183,7 +191,7 @@ describe('AclService', () => {
             ).rejects.toThrow(ForbiddenException);
         });
         it('should not pass the checker with a custom error', async () => {
-            service.registerRules('ruleWithCustomError', (opts) => {
+            service.registerRules('ruleWithCustomError', () => {
                 return [
                     {
                         req: service.getRolesBuilder().can('ADMIN').createAny('Something'),
@@ -204,7 +212,7 @@ describe('AclService', () => {
         });
         it('should not pass the checker with a custom http error', async () => {
             const error = new ForbiddenException('Custom error message');
-            service.registerRules('ruleWithCustomError', (opts) => {
+            service.registerRules('ruleWithCustomError', () => {
                 return [
                     {
                         req: service.getRolesBuilder().can('ADMIN').createAny('Something'),
@@ -224,5 +232,68 @@ describe('AclService', () => {
                 expect(e.message).toContain('Custom error message');
             }
         });
+        it('should not pass the checker for a missing acl rule creator cause rejectIfNoRule is true', async () => {
+            const data = { foo: 'bar' };
+            await expect(service.check({
+                id: 'creatorWithNoRule_rejectIfNoRule',
+                data,
+                rejectIfNoRule: true,
+                context: {
+                    user: {
+                        roles: ['USER']
+                    }
+                }
+            })).rejects.toThrow('No acl rule creator found for "creatorWithNoRule_rejectIfNoRule" context');
+        });
+        it('should not pass the checker for an acl rule creator returning no rule cause rejectIfNoRule is true', async () => {
+            const data = { foo: 'bar' };
+            await expect(service.check({
+                id: 'creatorWithNoRule',
+                data,
+                rejectIfNoRule: true,
+                context: {
+                    user: {
+                        roles: ['USER']
+                    }
+                }
+            })).rejects.toThrow('Acl creator did not return any acl rule for "creatorWithNoRule" context');
+        });
     });
+    describe('AclService with options', () => {
+        beforeAll(async () => {
+            mod = await Test.createTestingModule({
+                imports: [AclModule.register(roleBuilder, {rejectIfNoRule: true})]
+            }).compile();
+            service = mod.get<AclService>(AclService);
+            service = mod.get<AclService>(AclService);
+            service.registerRules('canDoSomething', canDoSomething);
+            service.registerRules('creatorWithNoRule_globalOptions', creatorWithNoRule);
+        });
+        describe('Checker', () => {
+            it('should not pass the checker for a missing acl rule creator cause global option rejectIfNoRule is true', async () => {
+                const data = { foo: 'bar' };
+                await expect(service.check({
+                    id: 'creatorWithNoRule_rejectIfNoRule_globalOptions',
+                    data,
+                    context: {
+                        user: {
+                            roles: ['USER']
+                        }
+                    }
+                })).rejects.toThrow('No acl rule creator found for "creatorWithNoRule_rejectIfNoRule_globalOptions" context');
+            });
+            it('should not pass the checker for an acl rule creator returning no rule cause global option rejectIfNoRule is true', async () => {
+                const data = { foo: 'bar' };
+                await expect(service.check({
+                    id: 'creatorWithNoRule_globalOptions',
+                    data,
+                    context: {
+                        user: {
+                            roles: ['USER']
+                        }
+                    }
+                })).rejects.toThrow('Acl creator did not return any acl rule for "creatorWithNoRule_globalOptions" context');
+            });
+        });
+    })
 });
