@@ -259,41 +259,42 @@ describe('AclService', () => {
             })).rejects.toThrow('Acl creator did not return any acl rule for "creatorWithNoRule" context');
         });
     });
-    describe('AclService with options', () => {
-        beforeAll(async () => {
-            mod = await Test.createTestingModule({
-                imports: [AclModule.register(roleBuilder, {rejectIfNoRule: true})]
-            }).compile();
-            service = mod.get<AclService>(AclService);
-            service = mod.get<AclService>(AclService);
-            service.registerRules('canDoSomething', canDoSomething);
-            service.registerRules('creatorWithNoRule_globalOptions', creatorWithNoRule);
-        });
-        describe('Checker', () => {
-            it('should not pass the checker for a missing acl rule creator cause global option rejectIfNoRule is true', async () => {
-                const data = { foo: 'bar' };
-                await expect(service.check({
-                    id: 'creatorWithNoRule_rejectIfNoRule_globalOptions',
-                    data,
-                    context: {
-                        user: {
-                            roles: ['USER']
-                        }
-                    }
-                })).rejects.toThrow('No acl rule creator found for "creatorWithNoRule_rejectIfNoRule_globalOptions" context');
-            });
-            it('should not pass the checker for an acl rule creator returning no rule cause global option rejectIfNoRule is true', async () => {
-                const data = { foo: 'bar' };
-                await expect(service.check({
-                    id: 'creatorWithNoRule_globalOptions',
-                    data,
-                    context: {
-                        user: {
-                            roles: ['USER']
-                        }
-                    }
-                })).rejects.toThrow('Acl creator did not return any acl rule for "creatorWithNoRule_globalOptions" context');
-            });
-        });
-    })
 });
+
+describe('AclService with options', () => {
+    beforeAll(async () => {
+        mod = await Test.createTestingModule({
+            imports: [AclModule.register(roleBuilder, {rejectIfNoRule: true})]
+        }).compile();
+        service = mod.get<AclService>(AclService);
+        service = mod.get<AclService>(AclService);
+        service.registerRules('canDoSomething', canDoSomething);
+        service.registerRules('creatorWithNoRule_globalOptions', creatorWithNoRule);
+    });
+    describe('Checker', () => {
+        it('should not pass the checker for a missing acl rule creator cause global option rejectIfNoRule is true', async () => {
+            const data = { foo: 'bar' };
+            await expect(service.check({
+                id: 'creatorWithNoRule_rejectIfNoRule_globalOptions',
+                data,
+                context: {
+                    user: {
+                        roles: ['USER']
+                    }
+                }
+            })).rejects.toThrow('No acl rule creator found for "creatorWithNoRule_rejectIfNoRule_globalOptions" context');
+        });
+        it('should not pass the checker for an acl rule creator returning no rule cause global option rejectIfNoRule is true', async () => {
+            const data = { foo: 'bar' };
+            await expect(service.check({
+                id: 'creatorWithNoRule_globalOptions',
+                data,
+                context: {
+                    user: {
+                        roles: ['USER']
+                    }
+                }
+            })).rejects.toThrow('Acl creator did not return any acl rule for "creatorWithNoRule_globalOptions" context');
+        });
+    });
+})
