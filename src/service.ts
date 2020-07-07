@@ -71,10 +71,8 @@ export class AclService {
         let rules: AclRule[] = [];
         try {
             if (!rulesCreator) {
-                console.log(opts.id, opts);
                 this.log('No rule creator found');
                 if(opts.rejectIfNoRule){
-                    console.log(opts.id, 'THROWWWW');
                     throw new ForbiddenException(`No acl rule creator found for "${opts.id}" context`);
                 }
                 return { data: opts.data };
@@ -90,7 +88,6 @@ export class AclService {
             if (!(e instanceof HttpException)) {
                 throw new ForbiddenException(e.message);
             }
-            console.log('THROWWWWWW', e)
             throw e;
         }
 
