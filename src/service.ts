@@ -2,8 +2,8 @@ import { ForbiddenException, HttpException, Injectable } from '@nestjs/common';
 import { AccessControl } from 'accesscontrol';
 import Debug from 'debug';
 
-import { InjectRolesBuilder } from './decorators';
-import { AclRulesCreator, IAclCheckOptions, IAclRule } from './interfaces';
+import { InjectOptions, InjectRolesBuilder } from './decorators';
+import { AclCheckOptions, AclModuleOptions, AclRule, AclRulesCreator } from './interfaces';
 
 @Injectable()
 export class AclService {
@@ -13,11 +13,14 @@ export class AclService {
     protected log = Debug('acl:' + AclService.name);
 
     /**
-     * A Map of IAclRules
+     * A Map of AclRules
      */
     protected rules: Map<string, AclRulesCreator> = new Map();
 
-    constructor(@InjectRolesBuilder() protected readonly rolesBuilder: AccessControl) {}
+
+    constructor(@InjectRolesBuilder() protected readonly rolesBuilder: AccessControl, @InjectOptions() protected options: AclModuleOptions){
+        this.globalOptions.rejectIfNoRule = options.rejectIfNoRule;
+    }
 
     /**
      * Get the role builder instance
@@ -30,13 +33,13 @@ export class AclService {
      * A key/value pair object of the global options to pass to rule creator during check.
      * All rules would be able to read those object keys
      */
-    protected globalOptions: { [key: string]: any } = {};
+    protected globalOptions: AclModuleOptions & { [key: string]: any } = {};
 
     /**
      * Set the global options
      * @see globalOptions
      */
-    setGlobalOptions(globalOptions: { [key: string]: any }) {
+    setGlobalOptions(globalOptions: AclModuleOptions & { [key: string]: any }) {
         this.globalOptions = globalOptions;
     }
 
@@ -55,22 +58,31 @@ export class AclService {
      * This method will check that each rules returned are granted.
      * @throws Error|ForbiddenException If access is not granted
      */
-    async check<D = any, S = any>(options: IAclCheckOptions<D, S>): Promise<{ rule?: IAclRule; data?: D }> {
-        const log = this.log.extend(options.id);
+    async check<D = any, S = any>(options: AclCheckOptions<D, S>): Promise<{ rule?: AclRule; data?: D }> {
+        
+        const opts = {
+            ...this.globalOptions,
+            ...options,
+            rolesBuilder: this.rolesBuilder
+        };
+        const log = this.log.extend(opts.id);
         log('Check rule creator');
-        const rulesCreator = this.rules.get(options.id);
-        if (!rulesCreator) {
-            this.log('No rule creator found');
-            return { data: options.data };
-        }
-        let rules: IAclRule[] = [];
+        const rulesCreator = this.rules.get(opts.id);
+        let rules: AclRule[] = [];
         try {
-            rules = await rulesCreator({
-                ...this.globalOptions,
-                ...options,
-                rolesBuilder: this.rolesBuilder
-            });
+            if (!rulesCreator) {
+                this.log('No rule creator found');
+                if(opts.rejectIfNoRule){
+                    throw new ForbiddenException(`No acl rule creator found for "${opts.id}" context`);
+                }
+                return { data: opts.data };
+            }
+            rules = await rulesCreator(opts);
             log('Creator returns %d rule(s)', rules.length);
+            if(rules.length === 0 && opts.rejectIfNoRule){
+                log('Fail, creator did not return any rule');
+                throw new ForbiddenException(`Acl creator did not return any acl rule for "${opts.id}" context`);
+            }
         } catch (e) {
             log('Error %o', e);
             if (!(e instanceof HttpException)) {
@@ -80,7 +92,7 @@ export class AclService {
         }
 
         const errors: Error[] = [];
-        let rule: IAclRule;
+        let rule: AclRule;
         for (const [index, r] of rules.entries()) {
             log('Check rule at index %d', index);
             const isValid = await this.isValidRule(r);
@@ -109,9 +121,9 @@ export class AclService {
     }
 
     /**
-     * Check if an IAclRule is valid
+     * Check if an AclRule is valid
      */
-    protected async isValidRule(rule: IAclRule) {
+    protected async isValidRule(rule: AclRule) {
         if (!rule.req.granted) {
             return false;
         }

@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>IAclContext | Nestjs ACL Documentation</title>
+	<title>AclModuleOptions | Nestjs ACL Documentation</title>
 	<meta name="description" content="Documentation for Nestjs ACL Documentation">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -57,32 +57,28 @@
 					<a href="../modules/_interfaces_.html">&quot;interfaces&quot;</a>
 				</li>
 				<li>
-					<a href="_interfaces_.iaclcontext.html">IAclContext</a>
+					<a href="_interfaces_.aclmoduleoptions.html">AclModuleOptions</a>
 				</li>
 			</ul>
-			<h1>Interface IAclContext&lt;R, User&gt;</h1>
+			<h1>Interface AclModuleOptions</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<section class="tsd-panel tsd-type-parameters">
-				<h3>Type parameters</h3>
-				<ul class="tsd-type-parameters">
-					<li>
-						<h4>R</h4>
-					</li>
-					<li>
-						<h4>User<span class="tsd-signature-symbol">: </span><a href="_interfaces_.iroles.html" class="tsd-signature-type">IRoles</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">R</span><span class="tsd-signature-symbol">&gt;</span></h4>
-					</li>
-				</ul>
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>The options of the module</p>
+					</div>
+				</div>
 			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">IAclContext</span>
+						<span class="target">AclModuleOptions</span>
 					</li>
 				</ul>
 			</section>
@@ -93,7 +89,7 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_interfaces_.iaclcontext.html#user" class="tsd-kind-icon">user</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_interfaces_.aclmoduleoptions.html#rejectifnorule" class="tsd-kind-icon">reject<wbr>IfNo<wbr>Rule</a></li>
 							</ul>
 						</section>
 					</div>
@@ -102,14 +98,19 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="user" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> user</h3>
-					<div class="tsd-signature tsd-kind-icon">user<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">User</span></div>
+					<a name="rejectifnorule" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> reject<wbr>IfNo<wbr>Rule</h3>
+					<div class="tsd-signature tsd-kind-icon">reject<wbr>IfNo<wbr>Rule<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Pop-Code/nestjs-acl/blob/49ab8c1/src/interfaces.ts#L14">src/interfaces.ts:14</a></li>
+							<li>Defined in <a href="https://github.com/Pop-Code/nestjs-acl/blob/77f68a0/src/interfaces.ts#L10">src/interfaces.ts:10</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Will reject the check if no rule creator found or if the creator returns no rule</p>
+						</div>
+					</div>
 				</section>
 			</section>
 		</div>
@@ -142,28 +143,31 @@
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter">
-						<a href="_interfaces_.iaclcheckoptions.html" class="tsd-kind-icon">IAcl<wbr>Check<wbr>Options</a>
+						<a href="_interfaces_.aclcheckoptions.html" class="tsd-kind-icon">Acl<wbr>Check<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter">
+						<a href="_interfaces_.aclcontext.html" class="tsd-kind-icon">Acl<wbr>Context</a>
 					</li>
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter">
-						<a href="_interfaces_.iaclcontext.html" class="tsd-kind-icon">IAcl<wbr>Context</a>
+					<li class="current tsd-kind-interface tsd-parent-kind-module">
+						<a href="_interfaces_.aclmoduleoptions.html" class="tsd-kind-icon">Acl<wbr>Module<wbr>Options</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_interfaces_.iaclcontext.html#user" class="tsd-kind-icon">user</a>
+								<a href="_interfaces_.aclmoduleoptions.html#rejectifnorule" class="tsd-kind-icon">reject<wbr>IfNo<wbr>Rule</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
+					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter">
+						<a href="_interfaces_.aclroles.html" class="tsd-kind-icon">Acl<wbr>Roles</a>
+					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="_interfaces_.iaclrule.html" class="tsd-kind-icon">IAcl<wbr>Rule</a>
+						<a href="_interfaces_.aclrule.html" class="tsd-kind-icon">Acl<wbr>Rule</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter">
-						<a href="_interfaces_.iaclrulescreatoroptions.html" class="tsd-kind-icon">IAcl<wbr>Rules<wbr>Creator<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter">
-						<a href="_interfaces_.iroles.html" class="tsd-kind-icon">IRoles</a>
+						<a href="_interfaces_.aclrulescreatoroptions.html" class="tsd-kind-icon">Acl<wbr>Rules<wbr>Creator<wbr>Options</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
 						<a href="../modules/_interfaces_.html#aclrulescreator" class="tsd-kind-icon">Acl<wbr>Rules<wbr>Creator</a>
@@ -195,6 +199,5 @@
 </footer>
 <div class="overlay"></div>
 <script src="../assets/js/main.js"></script>
-<script>if (location.protocol == 'file:') document.write('<script src="../assets/js/search.js"><' + '/script>');</script>
 </body>
 </html>

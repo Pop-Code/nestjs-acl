@@ -59,9 +59,9 @@ export const roles = new AccessControl({
 
 ### Create and register AclRulesCreators
 
-1. When testing acl, the AclService will search for matching AclRulesCreator and execute them passing the context.
-2. If a AclRulesCreator is not found, the check passes.
-3. If a AclRulesCreator is found, The creator is executed.
+1. The AclService will search for matching AclRulesCreator and execute them passing the context.
+2. If a AclRulesCreator is not found, the check passes (only if option rejectIfNoRule === false)
+3. If a AclRulesCreator is found, The creator is executed. if option rejectIfNoRule === true and no rule was returned by the creator, the check will fail.
 4. Returned Rules from AclRulesCreator are tested
     - The first rule that is granted will validate the test.
     - The first rule that throw an Error will stop the chain and invalidate the test.
@@ -148,7 +148,7 @@ export class MyProvider {
     /**
      * This method is protected by a rule with id userCanDoSomething
      */
-    async doSomething(user: IRoles<string>) {
+    async doSomething(user: AclRoles<string>) {
         const data = { foo: 'bar', user };
 
         // The AclService will throw a ForbiddenException if the check fails.
@@ -168,7 +168,7 @@ export class MyProvider {
     /**
      * This method is protected by a rule with id userCanDoSomethingElse
      */
-    async doSomethingElse(user: IRoles<string>) {
+    async doSomethingElse(user: AclRoles<string>) {
         const { rule, data } = await this.acl.check({
             id: 'userCanDoSomethingElse',
             context: {
