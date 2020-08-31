@@ -25,7 +25,7 @@
         "nest-access-control": "2.0.2"
     },
     "devDependencies": {
-        "@nestjs/core": "7.3.1",
+        "@nestjs/core": "7.4.3",
         "@nestjs/common": "7.3.1",
         "@nestjs/testing": "7.3.1",
         "@types/node": "14.0.18",
