@@ -13,7 +13,7 @@ export const canDoSomething: AclRulesCreator = (opts: AclRulesCreatorOptions) =>
         data
     } = opts;
 
-    if (!user) {
+    if (user === undefined) {
         throw new UnauthorizedException();
     }
 
