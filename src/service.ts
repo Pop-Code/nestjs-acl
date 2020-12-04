@@ -70,16 +70,16 @@ export class AclService {
         const rulesCreator = this.rules.get(opts.id);
         let rules: AclRule[] = [];
         try {
-            if (!rulesCreator) {
+            if (rulesCreator === undefined) {
                 this.log('No rule creator found');
-                if(opts.rejectIfNoRule){
+                if(opts.rejectIfNoRule === true){
                     throw new ForbiddenException(`No acl rule creator found for "${opts.id}" context`);
                 }
                 return { data: opts.data };
             }
             rules = await rulesCreator(opts);
             log('Creator returns %d rule(s)', rules.length);
-            if(rules.length === 0 && opts.rejectIfNoRule){
+            if(rules.length === 0 && opts.rejectIfNoRule === true){
                 log('Fail, creator did not return any rule');
                 throw new ForbiddenException(`Acl creator did not return any acl rule for "${opts.id}" context`);
             }
@@ -92,7 +92,7 @@ export class AclService {
         }
 
         const errors: Error[] = [];
-        let rule: AclRule;
+        let rule: AclRule | undefined;
         for (const [index, r] of rules.entries()) {
             log('Check rule at index %d', index);
             const isValid = await this.isValidRule(r);
@@ -107,9 +107,9 @@ export class AclService {
             }
         }
 
-        if (!rule) {
+        if (rule === undefined) {
             log('Fail, creator did not return any valid rule');
-            if (errors.length && !options.message) {
+            if (errors.length > 0 && options.message === undefined) {
                 options.message = errors.map((e) => e.message).join(', ');
             }
             throw new ForbiddenException(options.message);
@@ -123,11 +123,14 @@ export class AclService {
     /**
      * Check if an AclRule is valid
      */
-    protected async isValidRule(rule: AclRule) {
-        if (!rule.req.granted) {
+    protected async isValidRule(rule: AclRule|undefined) {
+        if(rule === undefined){
             return false;
         }
-        if (!rule.check) {
+        if (rule.req === undefined || !rule.req.granted) {
+            return false;
+        }
+        if (rule.check === undefined) {
             return true;
         }
         const valid = await rule.check();

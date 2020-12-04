@@ -1,6 +1,6 @@
 {
     "name": "nestjs-acl",
-    "version": "0.2.2",
+    "version": "0.2.3",
     "description": "A nestjs package to check acl rules at runtime",
     "author": "Rmannn <alex.hermann@pop-code.com>",
     "repository": "https://github.com/POP-CODE/nestjs-acl.git",
@@ -41,11 +41,15 @@
         "eslint": "7.14.0",
         "eslint-plugin-import": "2.22.1",
         "eslint-plugin-prefer-arrow": "1.2.2",
-        "@typescript-eslint/eslint-plugin": "4.8.2",
-        "@typescript-eslint/parser": "4.8.2",
-        "@types/jest": "26.0.15",
+        "@typescript-eslint/eslint-plugin": "4.9.0",
+        "@typescript-eslint/parser": "4.9.0",
+        "@types/jest": "26.0.16",
         "@types/debug": "4.1.5",
-        "eslint-config-prettier": "6.15.0"
+        "eslint-config-prettier": "6.15.0",
+        "eslint-config-standard-with-typescript": "19.0.1",
+        "eslint-plugin-node": "11.1.0",
+        "eslint-plugin-promise": "4.2.1",
+        "eslint-plugin-standard": "5.0.0"
     },
     "jest": {
         "moduleFileExtensions": [

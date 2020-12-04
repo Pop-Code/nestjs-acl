@@ -17,13 +17,15 @@ export interface AclRoles<Role> {
     roles?: Role[];
 }
 
+export type CheckReturnType = (boolean | Error | undefined) | Promise<(boolean | Error | undefined)>;
+
 /**
  * An Acl Rule
  */
 export interface AclRule {
     req?: Permission;
     res?: Permission;
-    check?: () => (boolean | Error) | Promise<boolean | Error>;
+    check?: () => CheckReturnType;
 }
 
 /**
