@@ -7,6 +7,7 @@
 	<meta name="description" content="Documentation for Nestjs ACL Documentation">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
+	<script async src="assets/js/search.js" id="search-script"></script>
 </head>
 <body>
 <header>
@@ -38,8 +39,6 @@
 							</div>
 							<input type="checkbox" id="tsd-filter-inherited" checked />
 							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
-							<input type="checkbox" id="tsd-filter-only-exported" />
-							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
 						</div>
 					</div>
 					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
@@ -49,11 +48,6 @@
 	</div>
 	<div class="tsd-page-title">
 		<div class="container">
-			<ul class="tsd-breadcrumb">
-				<li>
-					<a href="globals.html">Globals</a>
-				</li>
-			</ul>
 			<h1>Nestjs ACL Documentation</h1>
 		</div>
 	</div>
@@ -96,25 +90,26 @@
 				<p>Create a file that exports an AccessControl instance.
 				You can refer to the npm package <a href="https://www.npmjs.com/package/commander">accesscontrol</a> to learn how to manipulate roles</p>
 				<p><em>Note: The roles instance could be manipulate at runtime</em></p>
-				<pre><code class="language-ts"><span class="hljs-comment">// roles.ts</span>
-<span class="hljs-keyword">import</span> { AccessControl } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;accesscontrol&#x27;</span>;
+				<pre><code class="language-ts"><span style="color: #008000">// roles.ts</span>
+<span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">AccessControl</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;accesscontrol&#039;</span><span style="color: #000000">;</span>
 
-<span class="hljs-comment">// See npm package accesscontrol for details</span>
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> roles = <span class="hljs-keyword">new</span> AccessControl({
-    <span class="hljs-attr">ADMIN</span>: {
-        <span class="hljs-attr">doSomething</span>: {
-            <span class="hljs-string">&#x27;create:any&#x27;</span>: [<span class="hljs-string">&#x27;*&#x27;</span>]
-        },
-        <span class="hljs-attr">doSomethingElse</span>: {
-            <span class="hljs-string">&#x27;create:any&#x27;</span>: [<span class="hljs-string">&#x27;*&#x27;</span>]
-        }
-    },
-    <span class="hljs-attr">USER</span>: {
-        <span class="hljs-attr">doSomething</span>: {
-            <span class="hljs-string">&#x27;create:own&#x27;</span>: [<span class="hljs-string">&#x27;*&#x27;</span>]
-        }
-    }
-});</code></pre>
+<span style="color: #008000">// See npm package accesscontrol for details</span>
+<span style="color: #AF00DB">export</span><span style="color: #000000"> </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">roles</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">AccessControl</span><span style="color: #000000">({</span>
+<span style="color: #000000">    </span><span style="color: #001080">ADMIN:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">        </span><span style="color: #001080">doSomething:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">            </span><span style="color: #A31515">&#039;create:any&#039;</span><span style="color: #001080">:</span><span style="color: #000000"> [</span><span style="color: #A31515">&#039;*&#039;</span><span style="color: #000000">]</span>
+<span style="color: #000000">        },</span>
+<span style="color: #000000">        </span><span style="color: #001080">doSomethingElse:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">            </span><span style="color: #A31515">&#039;create:any&#039;</span><span style="color: #001080">:</span><span style="color: #000000"> [</span><span style="color: #A31515">&#039;*&#039;</span><span style="color: #000000">]</span>
+<span style="color: #000000">        }</span>
+<span style="color: #000000">    },</span>
+<span style="color: #000000">    </span><span style="color: #001080">USER:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">        </span><span style="color: #001080">doSomething:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">            </span><span style="color: #A31515">&#039;create:own&#039;</span><span style="color: #001080">:</span><span style="color: #000000"> [</span><span style="color: #A31515">&#039;*&#039;</span><span style="color: #000000">]</span>
+<span style="color: #000000">        }</span>
+<span style="color: #000000">    }</span>
+<span style="color: #000000">});</span>
+</code></pre>
 				<a href="#create-and-register-aclrulescreators" id="create-and-register-aclrulescreators" style="color: inherit; text-decoration: none;">
 					<h3>Create and register AclRulesCreators</h3>
 				</a>
@@ -130,112 +125,115 @@
 						</ul>
 					</li>
 				</ol>
-				<pre><code class="language-ts"><span class="hljs-comment">// rules.ts</span>
+				<pre><code class="language-ts"><span style="color: #008000">// rules.ts</span>
 
-<span class="hljs-comment">/**
- * Based on roles
- * users with the USER role will pass this scenarios only if they own the data (check returns true)
- * users with the ADMIN role will pass this scenarios
- */</span>
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> userCanDoSomething = <span class="hljs-function">(<span class="hljs-params">opts</span>) =&gt;</span> {
-    <span class="hljs-keyword">const</span> {
-        <span class="hljs-attr">context</span>: { user }, <span class="hljs-comment">// the context passed to the test</span>
-        data, <span class="hljs-comment">// the data passed to the test</span>
-        sourceData <span class="hljs-comment">// the source data passed to the test</span>
-    } = opts;
-    <span class="hljs-keyword">return</span> [
-        <span class="hljs-comment">// rule 1</span>
-        {
-            <span class="hljs-attr">req</span>: opts.rolesBuilder.can(opts.context.user.roles).createOwn(<span class="hljs-string">&#x27;doSomething&#x27;</span>),
-            <span class="hljs-comment">// do an extra check if with context</span>
-            <span class="hljs-attr">check</span>: <span class="hljs-function">() =&gt;</span> opts.data.user === context.user
-        },
-        <span class="hljs-comment">// rule 2</span>
-        {
-            <span class="hljs-attr">req</span>: opts.rolesBuilder.can(opts.context.user.roles).createAny(<span class="hljs-string">&#x27;doSomething&#x27;</span>)
-        }
-    ];
-};
+<span style="color: #008000">/**</span>
+<span style="color: #008000"> * Based on roles</span>
+<span style="color: #008000"> * users with the USER role will pass this scenarios only if they own the data (check returns true)</span>
+<span style="color: #008000"> * users with the ADMIN role will pass this scenarios</span>
+<span style="color: #008000"> */</span>
+<span style="color: #AF00DB">export</span><span style="color: #000000"> </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #795E26">userCanDoSomething</span><span style="color: #000000"> = (</span><span style="color: #001080">opts</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #0000FF">const</span><span style="color: #000000"> {</span>
+<span style="color: #000000">        </span><span style="color: #001080">context</span><span style="color: #000000">: { </span><span style="color: #0070C1">user</span><span style="color: #000000"> }, </span><span style="color: #008000">// the context passed to the test</span>
+<span style="color: #000000">        </span><span style="color: #0070C1">data</span><span style="color: #000000">, </span><span style="color: #008000">// the data passed to the test</span>
+<span style="color: #000000">        </span><span style="color: #0070C1">sourceData</span><span style="color: #000000"> </span><span style="color: #008000">// the source data passed to the test</span>
+<span style="color: #000000">    } = </span><span style="color: #001080">opts</span><span style="color: #000000">;</span>
+<span style="color: #000000">    </span><span style="color: #AF00DB">return</span><span style="color: #000000"> [</span>
+<span style="color: #000000">        </span><span style="color: #008000">// rule 1</span>
+<span style="color: #000000">        {</span>
+<span style="color: #000000">            </span><span style="color: #001080">req:</span><span style="color: #000000"> </span><span style="color: #001080">opts</span><span style="color: #000000">.</span><span style="color: #001080">rolesBuilder</span><span style="color: #000000">.</span><span style="color: #795E26">can</span><span style="color: #000000">(</span><span style="color: #001080">opts</span><span style="color: #000000">.</span><span style="color: #001080">context</span><span style="color: #000000">.</span><span style="color: #001080">user</span><span style="color: #000000">.</span><span style="color: #001080">roles</span><span style="color: #000000">).</span><span style="color: #795E26">createOwn</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;doSomething&#039;</span><span style="color: #000000">),</span>
+<span style="color: #000000">            </span><span style="color: #008000">// do an extra check if with context</span>
+<span style="color: #000000">            </span><span style="color: #795E26">check</span><span style="color: #001080">:</span><span style="color: #000000"> () </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">opts</span><span style="color: #000000">.</span><span style="color: #001080">data</span><span style="color: #000000">.</span><span style="color: #001080">user</span><span style="color: #000000"> === </span><span style="color: #001080">context</span><span style="color: #000000">.</span><span style="color: #001080">user</span>
+<span style="color: #000000">        },</span>
+<span style="color: #000000">        </span><span style="color: #008000">// rule 2</span>
+<span style="color: #000000">        {</span>
+<span style="color: #000000">            </span><span style="color: #001080">req:</span><span style="color: #000000"> </span><span style="color: #001080">opts</span><span style="color: #000000">.</span><span style="color: #001080">rolesBuilder</span><span style="color: #000000">.</span><span style="color: #795E26">can</span><span style="color: #000000">(</span><span style="color: #001080">opts</span><span style="color: #000000">.</span><span style="color: #001080">context</span><span style="color: #000000">.</span><span style="color: #001080">user</span><span style="color: #000000">.</span><span style="color: #001080">roles</span><span style="color: #000000">).</span><span style="color: #795E26">createAny</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;doSomething&#039;</span><span style="color: #000000">)</span>
+<span style="color: #000000">        }</span>
+<span style="color: #000000">    ];</span>
+<span style="color: #000000">};</span>
 
-<span class="hljs-comment">/**
- * Based on roles, only users with ADMIN role will be ale to pass this scenarios
- */</span>
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> userCanDoSomethingElse = <span class="hljs-function">(<span class="hljs-params">opts</span>) =&gt;</span> {
-    <span class="hljs-keyword">return</span> [
-        {
-            <span class="hljs-attr">req</span>: opts.rolesBuilder.can(opts.context.user.roles).createAny(<span class="hljs-string">&#x27;doSomethingElse&#x27;</span>)
-        }
-    ];
-};</code></pre>
+<span style="color: #008000">/**</span>
+<span style="color: #008000"> * Based on roles, only users with ADMIN role will be ale to pass this scenarios</span>
+<span style="color: #008000"> */</span>
+<span style="color: #AF00DB">export</span><span style="color: #000000"> </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #795E26">userCanDoSomethingElse</span><span style="color: #000000"> = (</span><span style="color: #001080">opts</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #AF00DB">return</span><span style="color: #000000"> [</span>
+<span style="color: #000000">        {</span>
+<span style="color: #000000">            </span><span style="color: #001080">req:</span><span style="color: #000000"> </span><span style="color: #001080">opts</span><span style="color: #000000">.</span><span style="color: #001080">rolesBuilder</span><span style="color: #000000">.</span><span style="color: #795E26">can</span><span style="color: #000000">(</span><span style="color: #001080">opts</span><span style="color: #000000">.</span><span style="color: #001080">context</span><span style="color: #000000">.</span><span style="color: #001080">user</span><span style="color: #000000">.</span><span style="color: #001080">roles</span><span style="color: #000000">).</span><span style="color: #795E26">createAny</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;doSomethingElse&#039;</span><span style="color: #000000">)</span>
+<span style="color: #000000">        }</span>
+<span style="color: #000000">    ];</span>
+<span style="color: #000000">};</span>
+</code></pre>
 				<a href="#import-and-register-the-aclmodule-module" id="import-and-register-the-aclmodule-module" style="color: inherit; text-decoration: none;">
 					<h3>Import and register the AclModule module</h3>
 				</a>
 				<p>The AclModule is global and need to be registered once, imported modules can inject the AclService without the need to register the module again.</p>
-				<pre><code class="language-ts"><span class="hljs-comment">// mymodule.ts</span>
-<span class="hljs-keyword">import</span> { AclModule, AclService } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;nestjs-acl&#x27;</span>;
-<span class="hljs-keyword">import</span> { roles } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./roles&#x27;</span>;
-<span class="hljs-keyword">import</span> { userCanDoSomething, userCanDoSomethingElse } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./rules&#x27;</span>;
-<span class="hljs-keyword">import</span> { MyProvider } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./provider&#x27;</span>;
+				<pre><code class="language-ts"><span style="color: #008000">// mymodule.ts</span>
+<span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">AclModule</span><span style="color: #000000">, </span><span style="color: #001080">AclService</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;nestjs-acl&#039;</span><span style="color: #000000">;</span>
+<span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">roles</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;./roles&#039;</span><span style="color: #000000">;</span>
+<span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">userCanDoSomething</span><span style="color: #000000">, </span><span style="color: #001080">userCanDoSomethingElse</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;./rules&#039;</span><span style="color: #000000">;</span>
+<span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">MyProvider</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;./provider&#039;</span><span style="color: #000000">;</span>
 
-<span class="hljs-meta">@Module</span>({
-    <span class="hljs-attr">imports</span>: [AclModule.register(roles), MyProvider]
-})
-<span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyModule</span> </span>{
-    <span class="hljs-function"><span class="hljs-title">construtor</span>(<span class="hljs-params"><span class="hljs-keyword">protected</span> acl: AclService</span>)</span> {
-        <span class="hljs-comment">// register acl rules creators</span>
-        <span class="hljs-built_in">this</span>.acl
-            .registerRules(<span class="hljs-string">&#x27;userCanDoSomething&#x27;</span>, userCanDoSomething)
-            .registerRules(<span class="hljs-string">&#x27;userCanDoSomethingElse&#x27;</span>, userCanDoSomethingElse);
-    }
-}</code></pre>
+<span style="color: #000000">@</span><span style="color: #795E26">Module</span><span style="color: #000000">({</span>
+<span style="color: #000000">    </span><span style="color: #001080">imports:</span><span style="color: #000000"> [</span><span style="color: #001080">AclModule</span><span style="color: #000000">.</span><span style="color: #795E26">register</span><span style="color: #000000">(</span><span style="color: #001080">roles</span><span style="color: #000000">), </span><span style="color: #001080">MyProvider</span><span style="color: #000000">]</span>
+<span style="color: #000000">})</span>
+<span style="color: #AF00DB">export</span><span style="color: #000000"> </span><span style="color: #0000FF">class</span><span style="color: #000000"> </span><span style="color: #267F99">MyModule</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #795E26">construtor</span><span style="color: #000000">(</span><span style="color: #0000FF">protected</span><span style="color: #000000"> </span><span style="color: #001080">acl</span><span style="color: #000000">: </span><span style="color: #267F99">AclService</span><span style="color: #000000">) {</span>
+<span style="color: #000000">        </span><span style="color: #008000">// register acl rules creators</span>
+<span style="color: #000000">        </span><span style="color: #0000FF">this</span><span style="color: #000000">.</span><span style="color: #001080">acl</span>
+<span style="color: #000000">            .</span><span style="color: #795E26">registerRules</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;userCanDoSomething&#039;</span><span style="color: #000000">, </span><span style="color: #001080">userCanDoSomething</span><span style="color: #000000">)</span>
+<span style="color: #000000">            .</span><span style="color: #795E26">registerRules</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;userCanDoSomethingElse&#039;</span><span style="color: #000000">, </span><span style="color: #001080">userCanDoSomethingElse</span><span style="color: #000000">);</span>
+<span style="color: #000000">    }</span>
+<span style="color: #000000">}</span>
+</code></pre>
 				<a href="#using-the-aclservice" id="using-the-aclservice" style="color: inherit; text-decoration: none;">
 					<h3>Using the AclService</h3>
 				</a>
 				<p>In your modules, providers or controllers you can now inject the AclService instance and use it to check acl rules.</p>
-				<pre><code class="language-ts"><span class="hljs-comment">// myprovider.ts</span>
-<span class="hljs-keyword">import</span> { Injectable } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@nestjs/common&#x27;</span>;
-<span class="hljs-keyword">import</span> { AclService } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;nestjs-acl&#x27;</span>;
+				<pre><code class="language-ts"><span style="color: #008000">// myprovider.ts</span>
+<span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">Injectable</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@nestjs/common&#039;</span><span style="color: #000000">;</span>
+<span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">AclService</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;nestjs-acl&#039;</span><span style="color: #000000">;</span>
 
-<span class="hljs-meta">@Injectable</span>()
-<span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyProvider</span> </span>{
-    <span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">protected</span> acl: AclService</span>)</span> {}
+<span style="color: #000000">@</span><span style="color: #795E26">Injectable</span><span style="color: #000000">()</span>
+<span style="color: #AF00DB">export</span><span style="color: #000000"> </span><span style="color: #0000FF">class</span><span style="color: #000000"> </span><span style="color: #267F99">MyProvider</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #0000FF">constructor</span><span style="color: #000000">(</span><span style="color: #0000FF">protected</span><span style="color: #000000"> </span><span style="color: #001080">acl</span><span style="color: #000000">: </span><span style="color: #267F99">AclService</span><span style="color: #000000">) {}</span>
 
-    <span class="hljs-comment">/**
-     * This method is protected by a rule with id userCanDoSomething
-     */</span>
-    <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-title">doSomething</span>(<span class="hljs-params">user: AclRoles&lt;<span class="hljs-built_in">string</span>&gt;</span>)</span> {
-        <span class="hljs-keyword">const</span> data = { <span class="hljs-attr">foo</span>: <span class="hljs-string">&#x27;bar&#x27;</span>, user };
+<span style="color: #000000">    </span><span style="color: #008000">/**</span>
+<span style="color: #008000">     * This method is protected by a rule with id userCanDoSomething</span>
+<span style="color: #008000">     */</span>
+<span style="color: #000000">    </span><span style="color: #0000FF">async</span><span style="color: #000000"> </span><span style="color: #795E26">doSomething</span><span style="color: #000000">(</span><span style="color: #001080">user</span><span style="color: #000000">: </span><span style="color: #267F99">AclRoles</span><span style="color: #000000">&lt;</span><span style="color: #267F99">string</span><span style="color: #000000">&gt;) {</span>
+<span style="color: #000000">        </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">data</span><span style="color: #000000"> = { </span><span style="color: #001080">foo:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;bar&#039;</span><span style="color: #000000">, </span><span style="color: #001080">user</span><span style="color: #000000"> };</span>
 
-        <span class="hljs-comment">// The AclService will throw a ForbiddenException if the check fails.</span>
-        <span class="hljs-keyword">const</span> { rule, data } = <span class="hljs-keyword">await</span> <span class="hljs-built_in">this</span>.acl.check({
-            <span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;userCanDoSomething&#x27;</span>,
-            data,
-            <span class="hljs-attr">context</span>: {
-                <span class="hljs-attr">user</span>: {
-                    <span class="hljs-attr">roles</span>: user.roles
-                }
-            }
-        });
+<span style="color: #000000">        </span><span style="color: #008000">// The AclService will throw a ForbiddenException if the check fails.</span>
+<span style="color: #000000">        </span><span style="color: #0000FF">const</span><span style="color: #000000"> { </span><span style="color: #0070C1">rule</span><span style="color: #000000">, </span><span style="color: #0070C1">data</span><span style="color: #000000"> } = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #0000FF">this</span><span style="color: #000000">.</span><span style="color: #001080">acl</span><span style="color: #000000">.</span><span style="color: #795E26">check</span><span style="color: #000000">({</span>
+<span style="color: #000000">            </span><span style="color: #001080">id:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;userCanDoSomething&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">            </span><span style="color: #001080">data</span><span style="color: #000000">,</span>
+<span style="color: #000000">            </span><span style="color: #001080">context:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">                </span><span style="color: #001080">user:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">                    </span><span style="color: #001080">roles:</span><span style="color: #000000"> </span><span style="color: #001080">user</span><span style="color: #000000">.</span><span style="color: #001080">roles</span>
+<span style="color: #000000">                }</span>
+<span style="color: #000000">            }</span>
+<span style="color: #000000">        });</span>
 
-        <span class="hljs-comment">// Do something...</span>
-    }
+<span style="color: #000000">        </span><span style="color: #008000">// Do something...</span>
+<span style="color: #000000">    }</span>
 
-    <span class="hljs-comment">/**
-     * This method is protected by a rule with id userCanDoSomethingElse
-     */</span>
-    <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-title">doSomethingElse</span>(<span class="hljs-params">user: AclRoles&lt;<span class="hljs-built_in">string</span>&gt;</span>)</span> {
-        <span class="hljs-keyword">const</span> { rule, data } = <span class="hljs-keyword">await</span> <span class="hljs-built_in">this</span>.acl.check({
-            <span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;userCanDoSomethingElse&#x27;</span>,
-            <span class="hljs-attr">context</span>: {
-                <span class="hljs-attr">user</span>: {
-                    <span class="hljs-attr">roles</span>: user.roles
-                }
-            }
-        });
+<span style="color: #000000">    </span><span style="color: #008000">/**</span>
+<span style="color: #008000">     * This method is protected by a rule with id userCanDoSomethingElse</span>
+<span style="color: #008000">     */</span>
+<span style="color: #000000">    </span><span style="color: #0000FF">async</span><span style="color: #000000"> </span><span style="color: #795E26">doSomethingElse</span><span style="color: #000000">(</span><span style="color: #001080">user</span><span style="color: #000000">: </span><span style="color: #267F99">AclRoles</span><span style="color: #000000">&lt;</span><span style="color: #267F99">string</span><span style="color: #000000">&gt;) {</span>
+<span style="color: #000000">        </span><span style="color: #0000FF">const</span><span style="color: #000000"> { </span><span style="color: #0070C1">rule</span><span style="color: #000000">, </span><span style="color: #0070C1">data</span><span style="color: #000000"> } = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #0000FF">this</span><span style="color: #000000">.</span><span style="color: #001080">acl</span><span style="color: #000000">.</span><span style="color: #795E26">check</span><span style="color: #000000">({</span>
+<span style="color: #000000">            </span><span style="color: #001080">id:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;userCanDoSomethingElse&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">            </span><span style="color: #001080">context:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">                </span><span style="color: #001080">user:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">                    </span><span style="color: #001080">roles:</span><span style="color: #000000"> </span><span style="color: #001080">user</span><span style="color: #000000">.</span><span style="color: #001080">roles</span>
+<span style="color: #000000">                }</span>
+<span style="color: #000000">            }</span>
+<span style="color: #000000">        });</span>
 
-        <span class="hljs-comment">// Do something else...</span>
-    }
-}</code></pre>
+<span style="color: #000000">        </span><span style="color: #008000">// Do something else...</span>
+<span style="color: #000000">    }</span>
+<span style="color: #000000">}</span>
+</code></pre>
 				<a href="#api-documentation" id="api-documentation" style="color: inherit; text-decoration: none;">
 					<h3><a href="https://pop-code.github.io/nestjs-acl">API DOCUMENTATION</a></h3>
 				</a>
@@ -247,26 +245,26 @@
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 			<nav class="tsd-navigation primary">
 				<ul>
-					<li class="globals  ">
-						<a href="globals.html"><em>Globals</em></a>
+					<li class=" ">
+						<a href="modules.html">Exports</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_constants_.html">&quot;constants&quot;</a>
+						<a href="modules/constants.html">constants</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_decorators_.html">&quot;decorators&quot;</a>
+						<a href="modules/decorators.html">decorators</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_index_.html">&quot;index&quot;</a>
+						<a href="modules/index.html">index</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_interfaces_.html">&quot;interfaces&quot;</a>
+						<a href="modules/interfaces.html">interfaces</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_module_.html">&quot;module&quot;</a>
+						<a href="modules/module.html">module</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_service_.html">&quot;service&quot;</a>
+						<a href="modules/service.html">service</a>
 					</li>
 				</ul>
 			</nav>
