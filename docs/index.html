@@ -39,6 +39,8 @@
 							</div>
 							<input type="checkbox" id="tsd-filter-inherited" checked />
 							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
 						</div>
 					</div>
 					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
@@ -79,11 +81,11 @@
 				<a href="#using-npm" id="using-npm" style="color: inherit; text-decoration: none;">
 					<h4>Using npm</h4>
 				</a>
-				<p><code>npm install accesscontrol nestjs-acl --save</code></p>
+				<p><code>npm install nestjs-acl --save</code></p>
 				<a href="#using-yarn" id="using-yarn" style="color: inherit; text-decoration: none;">
 					<h4>Using yarn</h4>
 				</a>
-				<p><code>yarn add accesscontrol nestjs-acl</code></p>
+				<p><code>yarn add nestjs-acl</code></p>
 				<a href="#prepare-the-roles" id="prepare-the-roles" style="color: inherit; text-decoration: none;">
 					<h3>Prepare the roles</h3>
 				</a>
@@ -91,7 +93,7 @@
 				You can refer to the npm package <a href="https://www.npmjs.com/package/commander">accesscontrol</a> to learn how to manipulate roles</p>
 				<p><em>Note: The roles instance could be manipulate at runtime</em></p>
 				<pre><code class="language-ts"><span style="color: #008000">// roles.ts</span>
-<span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">AccessControl</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;accesscontrol&#039;</span><span style="color: #000000">;</span>
+<span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">AccessControl</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;nestjs-acl&#039;</span><span style="color: #000000">;</span>
 
 <span style="color: #008000">// See npm package accesscontrol for details</span>
 <span style="color: #AF00DB">export</span><span style="color: #000000"> </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">roles</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">AccessControl</span><span style="color: #000000">({</span>
@@ -237,8 +239,8 @@
 				<a href="#api-documentation" id="api-documentation" style="color: inherit; text-decoration: none;">
 					<h3><a href="https://pop-code.github.io/nestjs-acl">API DOCUMENTATION</a></h3>
 				</a>
-				<a href="#changelog" id="changelog" style="color: inherit; text-decoration: none;">
-					<h3><a href="https://github.com/Pop-Code/nestjs-acl/blob/master/CHANGELOG.md">CHANGELOG</a></h3>
+				<a href="#changelogchangelog" id="changelogchangelog" style="color: inherit; text-decoration: none;">
+					<h3>[CHANGELOG][changelog]</h3>
 				</a>
 			</div>
 		</div>
@@ -248,28 +250,55 @@
 					<li class=" ">
 						<a href="modules.html">Exports</a>
 					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/constants.html">constants</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/decorators.html">decorators</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/index.html">index</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/interfaces.html">interfaces</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/module.html">module</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/service.html">service</a>
-					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-class tsd-is-external">
+						<a href="classes/accesscontrol.html" class="tsd-kind-icon">Access<wbr>Control</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/aclmodule.html" class="tsd-kind-icon">Acl<wbr>Module</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/aclservice.html" class="tsd-kind-icon">Acl<wbr>Service</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/aclcheckoptions.html" class="tsd-kind-icon">Acl<wbr>Check<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/aclcontext.html" class="tsd-kind-icon">Acl<wbr>Context</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/aclmoduleoptions.html" class="tsd-kind-icon">Acl<wbr>Module<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/aclroles.html" class="tsd-kind-icon">Acl<wbr>Roles</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/aclrule.html" class="tsd-kind-icon">Acl<wbr>Rule</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/aclrulescreatoroptions.html" class="tsd-kind-icon">Acl<wbr>Rules<wbr>Creator<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+						<a href="modules.html#aclrulescreator" class="tsd-kind-icon">Acl<wbr>Rules<wbr>Creator</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#checkreturntype" class="tsd-kind-icon">Check<wbr>Return<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="modules.html#options_token" class="tsd-kind-icon">OPTIONS_<wbr>TOKEN</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="modules.html#roles_builder_token" class="tsd-kind-icon">ROLES_<wbr>BUILDER_<wbr>TOKEN</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#injectoptions" class="tsd-kind-icon">Inject<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#injectrolesbuilder" class="tsd-kind-icon">Inject<wbr>Roles<wbr>Builder</a>
+					</li>
 				</ul>
 			</nav>
 		</div>
@@ -280,17 +309,18 @@
 		<h2>Legend</h2>
 		<div class="tsd-legend-group">
 			<ul class="tsd-legend">
-				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
-				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
-				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
-				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
-				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
 			</ul>
 		</div>
 	</div>

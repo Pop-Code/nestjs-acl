@@ -39,6 +39,8 @@
 							</div>
 							<input type="checkbox" id="tsd-filter-inherited" checked />
 							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
 						</div>
 					</div>
 					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
@@ -60,17 +62,225 @@
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Modules</h3>
+							<h3>Classes</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-module"><a href="modules/constants.html" class="tsd-kind-icon">constants</a></li>
-								<li class="tsd-kind-module"><a href="modules/decorators.html" class="tsd-kind-icon">decorators</a></li>
-								<li class="tsd-kind-module"><a href="modules/index.html" class="tsd-kind-icon">index</a></li>
-								<li class="tsd-kind-module"><a href="modules/interfaces.html" class="tsd-kind-icon">interfaces</a></li>
-								<li class="tsd-kind-module"><a href="modules/module.html" class="tsd-kind-icon">module</a></li>
-								<li class="tsd-kind-module"><a href="modules/service.html" class="tsd-kind-icon">service</a></li>
+								<li class="tsd-kind-class tsd-is-external"><a href="classes/accesscontrol.html" class="tsd-kind-icon">Access<wbr>Control</a></li>
+								<li class="tsd-kind-class"><a href="classes/aclmodule.html" class="tsd-kind-icon">Acl<wbr>Module</a></li>
+								<li class="tsd-kind-class"><a href="classes/aclservice.html" class="tsd-kind-icon">Acl<wbr>Service</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Interfaces</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-interface tsd-has-type-parameter"><a href="interfaces/aclcheckoptions.html" class="tsd-kind-icon">Acl<wbr>Check<wbr>Options</a></li>
+								<li class="tsd-kind-interface tsd-has-type-parameter"><a href="interfaces/aclcontext.html" class="tsd-kind-icon">Acl<wbr>Context</a></li>
+								<li class="tsd-kind-interface"><a href="interfaces/aclmoduleoptions.html" class="tsd-kind-icon">Acl<wbr>Module<wbr>Options</a></li>
+								<li class="tsd-kind-interface tsd-has-type-parameter"><a href="interfaces/aclroles.html" class="tsd-kind-icon">Acl<wbr>Roles</a></li>
+								<li class="tsd-kind-interface"><a href="interfaces/aclrule.html" class="tsd-kind-icon">Acl<wbr>Rule</a></li>
+								<li class="tsd-kind-interface tsd-has-type-parameter"><a href="interfaces/aclrulescreatoroptions.html" class="tsd-kind-icon">Acl<wbr>Rules<wbr>Creator<wbr>Options</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Type aliases</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-type-alias tsd-has-type-parameter"><a href="modules.html#aclrulescreator" class="tsd-kind-icon">Acl<wbr>Rules<wbr>Creator</a></li>
+								<li class="tsd-kind-type-alias"><a href="modules.html#checkreturntype" class="tsd-kind-icon">Check<wbr>Return<wbr>Type</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Variables</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-variable"><a href="modules.html#options_token" class="tsd-kind-icon">OPTIONS_<wbr>TOKEN</a></li>
+								<li class="tsd-kind-variable"><a href="modules.html#roles_builder_token" class="tsd-kind-icon">ROLES_<wbr>BUILDER_<wbr>TOKEN</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Functions</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-function"><a href="modules.html#injectoptions" class="tsd-kind-icon">Inject<wbr>Options</a></li>
+								<li class="tsd-kind-function"><a href="modules.html#injectrolesbuilder" class="tsd-kind-icon">Inject<wbr>Roles<wbr>Builder</a></li>
 							</ul>
 						</section>
 					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Type aliases</h2>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-has-type-parameter">
+					<a name="aclrulescreator" class="tsd-anchor"></a>
+					<h3>Acl<wbr>Rules<wbr>Creator</h3>
+					<div class="tsd-signature tsd-kind-icon">Acl<wbr>Rules<wbr>Creator&lt;Data, Source, Context&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><a href="interfaces/aclrulescreatoroptions.html" class="tsd-signature-type" data-tsd-kind="Interface">AclRulesCreatorOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Data</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Source</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Context</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="interfaces/aclrule.html" class="tsd-signature-type" data-tsd-kind="Interface">AclRule</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="interfaces/aclrule.html" class="tsd-signature-type" data-tsd-kind="Interface">AclRule</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/Pop-Code/nestjs-acl/blob/6ccf2d3/src/interfaces.ts#L89">src/interfaces.ts:89</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The signature of a acl rule creator</p>
+						</div>
+					</div>
+					<h4 class="tsd-type-parameters-title">Type parameters</h4>
+					<ul class="tsd-type-parameters">
+						<li>
+							<h4>Data = <span class="tsd-signature-type">any</span></h4>
+						</li>
+						<li>
+							<h4>Source = <span class="tsd-signature-type">any</span></h4>
+						</li>
+						<li>
+							<h4>Context<span class="tsd-signature-symbol">: </span><a href="interfaces/aclcontext.html" class="tsd-signature-type" data-tsd-kind="Interface">AclContext</a> = <span class="tsd-signature-type">any</span></h4>
+						</li>
+					</ul>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-alias">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><a href="interfaces/aclrulescreatoroptions.html" class="tsd-signature-type" data-tsd-kind="Interface">AclRulesCreatorOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Data</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Source</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Context</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="interfaces/aclrule.html" class="tsd-signature-type" data-tsd-kind="Interface">AclRule</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="interfaces/aclrule.html" class="tsd-signature-type" data-tsd-kind="Interface">AclRule</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>options: <a href="interfaces/aclrulescreatoroptions.html" class="tsd-signature-type" data-tsd-kind="Interface">AclRulesCreatorOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Data</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Source</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Context</span><span class="tsd-signature-symbol">&gt;</span></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <a href="interfaces/aclrule.html" class="tsd-signature-type" data-tsd-kind="Interface">AclRule</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="interfaces/aclrule.html" class="tsd-signature-type" data-tsd-kind="Interface">AclRule</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias">
+					<a name="checkreturntype" class="tsd-anchor"></a>
+					<h3>Check<wbr>Return<wbr>Type</h3>
+					<div class="tsd-signature tsd-kind-icon">Check<wbr>Return<wbr>Type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Error</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Error</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/Pop-Code/nestjs-acl/blob/6ccf2d3/src/interfaces.ts#L20">src/interfaces.ts:20</a></li>
+						</ul>
+					</aside>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Variables</h2>
+				<section class="tsd-panel tsd-member tsd-kind-variable">
+					<a name="options_token" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> OPTIONS_<wbr>TOKEN</h3>
+					<div class="tsd-signature tsd-kind-icon">OPTIONS_<wbr>TOKEN<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;nestjs-acl-options&quot;</span><span class="tsd-signature-symbol"> = &#x27;nestjs-acl-options&#x27;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/Pop-Code/nestjs-acl/blob/6ccf2d3/src/constants.ts#L2">src/constants.ts:2</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable">
+					<a name="roles_builder_token" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> ROLES_<wbr>BUILDER_<wbr>TOKEN</h3>
+					<div class="tsd-signature tsd-kind-icon">ROLES_<wbr>BUILDER_<wbr>TOKEN<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;nestjs-acl-roles&quot;</span><span class="tsd-signature-symbol"> = &#x27;nestjs-acl-roles&#x27;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/Pop-Code/nestjs-acl/blob/6ccf2d3/src/constants.ts#L1">src/constants.ts:1</a></li>
+						</ul>
+					</aside>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Functions</h2>
+				<section class="tsd-panel tsd-member tsd-kind-function">
+					<a name="injectoptions" class="tsd-anchor"></a>
+					<h3>Inject<wbr>Options</h3>
+					<ul class="tsd-signatures tsd-kind-function">
+						<li class="tsd-signature tsd-kind-icon">Inject<wbr>Options<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>target<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span>, key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span>, index<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/Pop-Code/nestjs-acl/blob/6ccf2d3/src/decorators.ts#L15">src/decorators.ts:15</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>A nestjs param decorator to inject the options into providers</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">(</span>target<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span>, key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span>, index<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h4>
+							<ul class="tsd-parameters">
+								<li class="tsd-parameter-signature">
+									<ul class="tsd-signatures tsd-kind-type-literal">
+										<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>target<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span>, key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span>, index<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+									</ul>
+									<ul class="tsd-descriptions">
+										<li class="tsd-description">
+											<h4 class="tsd-parameters-title">Parameters</h4>
+											<ul class="tsd-parameters">
+												<li>
+													<h5>target: <span class="tsd-signature-type">object</span></h5>
+												</li>
+												<li>
+													<h5>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span></h5>
+												</li>
+												<li>
+													<h5><span class="tsd-flag ts-flagOptional">Optional</span> index: <span class="tsd-signature-type">number</span></h5>
+												</li>
+											</ul>
+											<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function">
+					<a name="injectrolesbuilder" class="tsd-anchor"></a>
+					<h3>Inject<wbr>Roles<wbr>Builder</h3>
+					<ul class="tsd-signatures tsd-kind-function">
+						<li class="tsd-signature tsd-kind-icon">Inject<wbr>Roles<wbr>Builder<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>target<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span>, key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span>, index<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/Pop-Code/nestjs-acl/blob/6ccf2d3/src/decorators.ts#L8">src/decorators.ts:8</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>A nestjs param decorator to inject the role builder instance into providers</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">(</span>target<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span>, key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span>, index<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h4>
+							<ul class="tsd-parameters">
+								<li class="tsd-parameter-signature">
+									<ul class="tsd-signatures tsd-kind-type-literal">
+										<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>target<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span>, key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span>, index<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+									</ul>
+									<ul class="tsd-descriptions">
+										<li class="tsd-description">
+											<h4 class="tsd-parameters-title">Parameters</h4>
+											<ul class="tsd-parameters">
+												<li>
+													<h5>target: <span class="tsd-signature-type">object</span></h5>
+												</li>
+												<li>
+													<h5>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span></h5>
+												</li>
+												<li>
+													<h5><span class="tsd-flag ts-flagOptional">Optional</span> index: <span class="tsd-signature-type">number</span></h5>
+												</li>
+											</ul>
+											<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+					</ul>
 				</section>
 			</section>
 		</div>
@@ -80,28 +290,55 @@
 					<li class="current ">
 						<a href="modules.html">Exports</a>
 					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/constants.html">constants</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/decorators.html">decorators</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/index.html">index</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/interfaces.html">interfaces</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/module.html">module</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/service.html">service</a>
-					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-class tsd-is-external">
+						<a href="classes/accesscontrol.html" class="tsd-kind-icon">Access<wbr>Control</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/aclmodule.html" class="tsd-kind-icon">Acl<wbr>Module</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/aclservice.html" class="tsd-kind-icon">Acl<wbr>Service</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/aclcheckoptions.html" class="tsd-kind-icon">Acl<wbr>Check<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/aclcontext.html" class="tsd-kind-icon">Acl<wbr>Context</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/aclmoduleoptions.html" class="tsd-kind-icon">Acl<wbr>Module<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/aclroles.html" class="tsd-kind-icon">Acl<wbr>Roles</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/aclrule.html" class="tsd-kind-icon">Acl<wbr>Rule</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/aclrulescreatoroptions.html" class="tsd-kind-icon">Acl<wbr>Rules<wbr>Creator<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+						<a href="modules.html#aclrulescreator" class="tsd-kind-icon">Acl<wbr>Rules<wbr>Creator</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#checkreturntype" class="tsd-kind-icon">Check<wbr>Return<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="modules.html#options_token" class="tsd-kind-icon">OPTIONS_<wbr>TOKEN</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="modules.html#roles_builder_token" class="tsd-kind-icon">ROLES_<wbr>BUILDER_<wbr>TOKEN</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#injectoptions" class="tsd-kind-icon">Inject<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#injectrolesbuilder" class="tsd-kind-icon">Inject<wbr>Roles<wbr>Builder</a>
+					</li>
 				</ul>
 			</nav>
 		</div>
@@ -112,17 +349,18 @@
 		<h2>Legend</h2>
 		<div class="tsd-legend-group">
 			<ul class="tsd-legend">
-				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
-				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
-				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
-				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
-				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
 			</ul>
 		</div>
 	</div>

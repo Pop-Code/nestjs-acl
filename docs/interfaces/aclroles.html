@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>AclContext | Nestjs ACL Documentation</title>
+	<title>AclRoles | Nestjs ACL Documentation</title>
 	<meta name="description" content="Documentation for Nestjs ACL Documentation">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -39,6 +39,8 @@
 							</div>
 							<input type="checkbox" id="tsd-filter-inherited" checked />
 							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
 						</div>
 					</div>
 					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
@@ -53,13 +55,10 @@
 					<a href="../modules.html">Nestjs ACL Documentation</a>
 				</li>
 				<li>
-					<a href="../modules/interfaces.html">interfaces</a>
-				</li>
-				<li>
-					<a href="interfaces.aclcontext.html">AclContext</a>
+					<a href="aclroles.html">AclRoles</a>
 				</li>
 			</ul>
-			<h1>Interface AclContext&lt;R, User&gt;</h1>
+			<h1>Interface AclRoles&lt;Role&gt;</h1>
 		</div>
 	</div>
 </header>
@@ -69,7 +68,7 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>The context of a request</p>
+						<p>The interface of the entity implementing roles. Usually this is your user entity</p>
 					</div>
 				</div>
 			</section>
@@ -77,10 +76,7 @@
 				<h3>Type parameters</h3>
 				<ul class="tsd-type-parameters">
 					<li>
-						<h4>R = <span class="tsd-signature-type">any</span></h4>
-					</li>
-					<li>
-						<h4>User<span class="tsd-signature-symbol">: </span><a href="interfaces.aclroles.html" class="tsd-signature-type" data-tsd-kind="Interface">AclRoles</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">R</span><span class="tsd-signature-symbol">&gt;</span> = <span class="tsd-signature-type">any</span></h4>
+						<h4>Role</h4>
 					</li>
 				</ul>
 			</section>
@@ -88,7 +84,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">AclContext</span>
+						<span class="target">AclRoles</span>
 					</li>
 				</ul>
 			</section>
@@ -99,7 +95,7 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="interfaces.aclcontext.html#user" class="tsd-kind-icon">user</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="aclroles.html#roles" class="tsd-kind-icon">roles</a></li>
 							</ul>
 						</section>
 					</div>
@@ -108,12 +104,12 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="user" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> user</h3>
-					<div class="tsd-signature tsd-kind-icon">user<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">User</span></div>
+					<a name="roles" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> roles</h3>
+					<div class="tsd-signature tsd-kind-icon">roles<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Role</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Pop-Code/nestjs-acl/blob/3740c25/src/interfaces.ts#L35">src/interfaces.ts:35</a></li>
+							<li>Defined in <a href="https://github.com/Pop-Code/nestjs-acl/blob/6ccf2d3/src/interfaces.ts#L17">src/interfaces.ts:17</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -125,60 +121,63 @@
 					<li class=" ">
 						<a href="../modules.html">Exports</a>
 					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/constants.html">constants</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/decorators.html">decorators</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/index.html">index</a>
-					</li>
-					<li class="current tsd-kind-module">
-						<a href="../modules/interfaces.html">interfaces</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/module.html">module</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/service.html">service</a>
-					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter">
-						<a href="interfaces.aclcheckoptions.html" class="tsd-kind-icon">Acl<wbr>Check<wbr>Options</a>
+					<li class=" tsd-kind-class tsd-is-external">
+						<a href="../classes/accesscontrol.html" class="tsd-kind-icon">Access<wbr>Control</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="../classes/aclmodule.html" class="tsd-kind-icon">Acl<wbr>Module</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="../classes/aclservice.html" class="tsd-kind-icon">Acl<wbr>Service</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="aclcheckoptions.html" class="tsd-kind-icon">Acl<wbr>Check<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="aclcontext.html" class="tsd-kind-icon">Acl<wbr>Context</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="aclmoduleoptions.html" class="tsd-kind-icon">Acl<wbr>Module<wbr>Options</a>
 					</li>
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter">
-						<a href="interfaces.aclcontext.html" class="tsd-kind-icon">Acl<wbr>Context</a>
+					<li class="current tsd-kind-interface tsd-has-type-parameter">
+						<a href="aclroles.html" class="tsd-kind-icon">Acl<wbr>Roles</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="interfaces.aclcontext.html#user" class="tsd-kind-icon">user</a>
+								<a href="aclroles.html#roles" class="tsd-kind-icon">roles</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="interfaces.aclmoduleoptions.html" class="tsd-kind-icon">Acl<wbr>Module<wbr>Options</a>
+					<li class=" tsd-kind-interface">
+						<a href="aclrule.html" class="tsd-kind-icon">Acl<wbr>Rule</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter">
-						<a href="interfaces.aclroles.html" class="tsd-kind-icon">Acl<wbr>Roles</a>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="aclrulescreatoroptions.html" class="tsd-kind-icon">Acl<wbr>Rules<wbr>Creator<wbr>Options</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="interfaces.aclrule.html" class="tsd-kind-icon">Acl<wbr>Rule</a>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+						<a href="../modules.html#aclrulescreator" class="tsd-kind-icon">Acl<wbr>Rules<wbr>Creator</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter">
-						<a href="interfaces.aclrulescreatoroptions.html" class="tsd-kind-icon">Acl<wbr>Rules<wbr>Creator<wbr>Options</a>
+					<li class=" tsd-kind-type-alias">
+						<a href="../modules.html#checkreturntype" class="tsd-kind-icon">Check<wbr>Return<wbr>Type</a>
 					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
-						<a href="../modules/interfaces.html#aclrulescreator" class="tsd-kind-icon">Acl<wbr>Rules<wbr>Creator</a>
+					<li class=" tsd-kind-variable">
+						<a href="../modules.html#options_token" class="tsd-kind-icon">OPTIONS_<wbr>TOKEN</a>
 					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
-						<a href="../modules/interfaces.html#checkreturntype" class="tsd-kind-icon">Check<wbr>Return<wbr>Type</a>
+					<li class=" tsd-kind-variable">
+						<a href="../modules.html#roles_builder_token" class="tsd-kind-icon">ROLES_<wbr>BUILDER_<wbr>TOKEN</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="../modules.html#injectoptions" class="tsd-kind-icon">Inject<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="../modules.html#injectrolesbuilder" class="tsd-kind-icon">Inject<wbr>Roles<wbr>Builder</a>
 					</li>
 				</ul>
 			</nav>
@@ -190,18 +189,18 @@
 		<h2>Legend</h2>
 		<div class="tsd-legend-group">
 			<ul class="tsd-legend">
-				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
-				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
-				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
-				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
-				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+			</ul>
+			<ul class="tsd-legend">
 				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
 			</ul>
 		</div>
 	</div>

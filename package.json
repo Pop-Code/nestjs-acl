@@ -9,7 +9,7 @@
     "scripts": {
         "build": "rm -Rf dist && tsc -b",
         "format": "prettier \"**/*.ts\" --ignore-path ./.prettierignore --write && git status",
-        "doc": "rm -Rf ./docs && typedoc ./src && touch ./docs/.nojekyll",
+        "doc": "rm -Rf ./docs && typedoc && touch ./docs/.nojekyll",
         "lint": "eslint src/**/**.ts",
         "test": "jest",
         "test:cov": "jest --coverage",

@@ -22,11 +22,11 @@ nest-access-control is a module to protect methods using decorators. It also all
 
 #### Using npm
 
-`npm install accesscontrol nestjs-acl --save`
+`npm install nestjs-acl --save`
 
 #### Using yarn
 
-`yarn add accesscontrol nestjs-acl`
+`yarn add nestjs-acl`
 
 ### Prepare the roles
 
@@ -37,7 +37,7 @@ _Note: The roles instance could be manipulate at runtime_
 
 ```ts
 // roles.ts
-import { AccessControl } from 'accesscontrol';
+import { AccessControl } from 'nestjs-acl';
 
 // See npm package accesscontrol for details
 export const roles = new AccessControl({
@@ -193,4 +193,3 @@ export class MyProvider {
 [codecov]: https://codecov.io/gh/Pop-Code/nestjs-acl
 [doclink]: https://pop-code.github.io/nestjs-acl
 [accesscontrol]: https://www.npmjs.com/package/commander
-[changelog]: https://github.com/Pop-Code/nestjs-acl/blob/master/CHANGELOG.md
