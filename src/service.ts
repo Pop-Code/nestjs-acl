@@ -123,10 +123,7 @@ export class AclService {
     /**
      * Check if an AclRule is valid
      */
-    protected async isValidRule(rule: AclRule|undefined) {
-        if(rule === undefined){
-            return false;
-        }
+    protected async isValidRule(rule: AclRule) {
         if (rule.req === undefined || !rule.req.granted) {
             return false;
         }
