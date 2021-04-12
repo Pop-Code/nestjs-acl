@@ -185,8 +185,6 @@ export class MyProvider {
 
 ### [API DOCUMENTATION][doclink]
 
-### [CHANGELOG][changelog]
-
 [npm]: https://www.npmjs.com/package/nestjs-acl
 [npmchart]: https://npmcharts.com/compare/nestjs-acl?minimal=true
 [ci]: https://circleci.com/gh/Pop-Code/nestjs-acl
