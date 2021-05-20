@@ -4,7 +4,7 @@
 [![codecov](https://codecov.io/gh/Pop-Code/nestjs-acl/branch/master/graph/badge.svg)][codecov]
 [![NPM Downloads](https://img.shields.io/npm/dm/nestjs-acl.svg?style=flat)][npmchart]
 ![node](https://img.shields.io/node/v/nestjs-acl)
-![npm (tag)](https://img.shields.io/npm/v/nestjs-console/latest)
+![npm (tag)](https://img.shields.io/npm/v/nestjs-acl/latest)
 ![npm peer dependency version (scoped)](https://img.shields.io/npm/dependency-version/nestjs-console/peer/@nestjs/core)
 
 ## Why the nestjs-acl module?
