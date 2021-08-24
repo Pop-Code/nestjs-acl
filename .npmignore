@@ -12,3 +12,4 @@ yarn.lock
 .github
 renovate.json
 dist/test
+.yarn*
