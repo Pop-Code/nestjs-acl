@@ -40,7 +40,7 @@
         "eslint-plugin-node": "11.1.0",
         "eslint-plugin-prefer-arrow": "1.2.3",
         "eslint-plugin-promise": "5.1.0",
-        "jest": "27.0.6",
+        "jest": "27.4.7",
         "prettier": "2.3.2",
         "reflect-metadata": "0.1.13",
         "rxjs": "7.3.0",
